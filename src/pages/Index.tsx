@@ -108,20 +108,40 @@ const Index = () => {
                 style={{ backgroundImage: `url(${heroCarbon})` }}
               />
               
-              <div className="relative z-10">
-                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">
-                  FortuneGroup S.A. &amp; SFI Investimentos
+              {/* Logos e selos */}
+              <div className="flex items-center justify-center gap-6 mb-2 relative z-10 animate-scale-in">
+                <div className="h-16 w-16 rounded-2xl bg-primary/20 border-2 border-primary/30 flex items-center justify-center backdrop-blur-sm hover-scale">
+                  <span className="text-2xl font-bold text-primary">FG</span>
+                </div>
+                <div className="h-14 w-14 rounded-xl bg-blue-500/20 border-2 border-blue-500/30 flex items-center justify-center backdrop-blur-sm hover-scale">
+                  <span className="text-xs font-bold text-blue-400">COP30</span>
+                </div>
+                <div className="h-14 w-14 rounded-xl bg-green-500/20 border-2 border-green-500/30 flex items-center justify-center backdrop-blur-sm hover-scale">
+                  <span className="text-xs font-bold text-green-400">ESG</span>
+                </div>
+              </div>
+              
+              <div className="relative z-10 space-y-6">
+                <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">
+                    FortuneGroup S.A. &amp; SFI Investimentos
+                  </p>
+                  <h1 className="text-5xl md:text-6xl font-bold mt-6 mb-4 text-foreground">
+                    Fortune Carbon Removal Fund
+                  </h1>
+                </div>
+                
+                <p className="text-2xl md:text-3xl font-semibold max-w-3xl mx-auto text-foreground leading-tight animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                  Invista na transição climática com lastro em créditos de carbono reais da Amazônia
                 </p>
-                <h1 className="text-5xl md:text-6xl font-bold mt-6 mb-4 text-foreground">
-                  Fortune Carbon Removal Fund
-                </h1>
-                <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-muted-foreground leading-relaxed">
+                
+                <p className="mt-4 text-base md:text-lg max-w-3xl mx-auto text-muted-foreground leading-relaxed animate-fade-in" style={{ animationDelay: '0.6s' }}>
                   Fiagro focado em créditos de carbono e CPRs que conecta o
                   agronegócio brasileiro à economia de baixo carbono.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full relative z-10 animate-fade-in" style={{ animationDelay: '0.8s' }}>
                 <HighlightCard title="R$ 500 milhões" delay="100">
                   Tamanho alvo da oferta, com foco em ativos de alta integridade
                   climática.
@@ -141,12 +161,13 @@ const Index = () => {
                   playSoundNext();
                   setStep(1);
                 }}
-                className="relative z-10 px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105"
+                className="relative z-10 px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 pulse animate-fade-in"
+                style={{ animationDelay: '1s' }}
               >
-                Toque para começar
+                Toque na tela para simular seu investimento
               </button>
 
-              <p className="text-xs max-w-2xl mx-auto text-muted-foreground leading-relaxed relative z-10">
+              <p className="text-xs max-w-2xl mx-auto text-muted-foreground leading-relaxed relative z-10 animate-fade-in" style={{ animationDelay: '1.2s' }}>
                 Material publicitário. Não constitui oferta pública de valores
                 mobiliários. Leia o regulamento e demais documentos oficiais
                 antes de investir.
