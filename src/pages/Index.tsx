@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import heroCarbon from "@/assets/hero-carbon.jpg";
+import { useSoundFeedback } from "@/hooks/useSoundFeedback";
 
 type InvestorType = "PF" | "PJ" | "INST" | null;
 type TicketRange = "0-100" | "100-500" | "500-2000" | "2000+" | null;
@@ -31,6 +32,7 @@ const Index = () => {
     country: "",
   });
   const [qrUrl, setQrUrl] = useState<string | null>(null);
+  const { playNext: playSoundNext, playBack: playSoundBack, playSelect, playSubmit } = useSoundFeedback();
 
   // --- Controle de inatividade para totem ---
   useEffect(() => {
@@ -65,17 +67,20 @@ const Index = () => {
   }, []);
 
   const next = () => {
+    playSoundNext();
     setDirection("forward");
     setStep((s) => s + 1);
   };
   
   const back = () => {
+    playSoundBack();
     setDirection("backward");
     setStep((s) => Math.max(0, s - 1));
   };
 
   const handleSubmitLead = async () => {
     try {
+      playSubmit();
       // Aqui você conecta com n8n ou sua API
       // const res = await fetch("https://sua-api.com/leads-totem", { 
       //   method: "POST",
@@ -132,7 +137,10 @@ const Index = () => {
               </div>
 
               <button
-                onClick={() => setStep(1)}
+                onClick={() => {
+                  playSoundNext();
+                  setStep(1);
+                }}
                 className="relative z-10 px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105"
               >
                 Toque para começar
@@ -303,25 +311,28 @@ const Index = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <ChoiceButton
                     selected={lead.investorType === "PF"}
-                    onClick={() =>
-                      setLead((l) => ({ ...l, investorType: "PF" }))
-                    }
+                    onClick={() => {
+                      playSelect();
+                      setLead((l) => ({ ...l, investorType: "PF" }));
+                    }}
                   >
                     Pessoa Física
                   </ChoiceButton>
                   <ChoiceButton
                     selected={lead.investorType === "PJ"}
-                    onClick={() =>
-                      setLead((l) => ({ ...l, investorType: "PJ" }))
-                    }
+                    onClick={() => {
+                      playSelect();
+                      setLead((l) => ({ ...l, investorType: "PJ" }));
+                    }}
                   >
                     Pessoa Jurídica
                   </ChoiceButton>
                   <ChoiceButton
                     selected={lead.investorType === "INST"}
-                    onClick={() =>
-                      setLead((l) => ({ ...l, investorType: "INST" }))
-                    }
+                    onClick={() => {
+                      playSelect();
+                      setLead((l) => ({ ...l, investorType: "INST" }));
+                    }}
                   >
                     Family office / Institucional
                   </ChoiceButton>
@@ -335,33 +346,37 @@ const Index = () => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <ChoiceButton
                     selected={lead.ticketRange === "0-100"}
-                    onClick={() =>
-                      setLead((l) => ({ ...l, ticketRange: "0-100" }))
-                    }
+                    onClick={() => {
+                      playSelect();
+                      setLead((l) => ({ ...l, ticketRange: "0-100" }));
+                    }}
                   >
                     Até R$ 100 mil
                   </ChoiceButton>
                   <ChoiceButton
                     selected={lead.ticketRange === "100-500"}
-                    onClick={() =>
-                      setLead((l) => ({ ...l, ticketRange: "100-500" }))
-                    }
+                    onClick={() => {
+                      playSelect();
+                      setLead((l) => ({ ...l, ticketRange: "100-500" }));
+                    }}
                   >
                     R$ 100 mil – 500 mil
                   </ChoiceButton>
                   <ChoiceButton
                     selected={lead.ticketRange === "500-2000"}
-                    onClick={() =>
-                      setLead((l) => ({ ...l, ticketRange: "500-2000" }))
-                    }
+                    onClick={() => {
+                      playSelect();
+                      setLead((l) => ({ ...l, ticketRange: "500-2000" }));
+                    }}
                   >
                     R$ 500 mil – 2 milhões
                   </ChoiceButton>
                   <ChoiceButton
                     selected={lead.ticketRange === "2000+"}
-                    onClick={() =>
-                      setLead((l) => ({ ...l, ticketRange: "2000+" }))
-                    }
+                    onClick={() => {
+                      playSelect();
+                      setLead((l) => ({ ...l, ticketRange: "2000+" }));
+                    }}
                   >
                     Acima de R$ 2 milhões
                   </ChoiceButton>
@@ -375,25 +390,28 @@ const Index = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <ChoiceButton
                     selected={lead.horizon === "2-"}
-                    onClick={() =>
-                      setLead((l) => ({ ...l, horizon: "2-" }))
-                    }
+                    onClick={() => {
+                      playSelect();
+                      setLead((l) => ({ ...l, horizon: "2-" }));
+                    }}
                   >
                     Até 2 anos
                   </ChoiceButton>
                   <ChoiceButton
                     selected={lead.horizon === "3-5"}
-                    onClick={() =>
-                      setLead((l) => ({ ...l, horizon: "3-5" }))
-                    }
+                    onClick={() => {
+                      playSelect();
+                      setLead((l) => ({ ...l, horizon: "3-5" }));
+                    }}
                   >
                     3 – 5 anos
                   </ChoiceButton>
                   <ChoiceButton
                     selected={lead.horizon === "5+"}
-                    onClick={() =>
-                      setLead((l) => ({ ...l, horizon: "5+" }))
-                    }
+                    onClick={() => {
+                      playSelect();
+                      setLead((l) => ({ ...l, horizon: "5+" }));
+                    }}
                   >
                     Acima de 5 anos
                   </ChoiceButton>
