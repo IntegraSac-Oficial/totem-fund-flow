@@ -115,21 +115,21 @@ const Index = () => {
                 <div className="animate-fade-in" style={{
                 animationDelay: '0.2s'
               }}>
-                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">
+                  <p className="text-xs uppercase tracking-[0.3em] text-white font-medium">
                     FortuneGroup S.A. &amp; SFI Investimentos
                   </p>
-                  <h1 className="text-5xl md:text-6xl font-bold mt-6 mb-4 text-foreground">
+                  <h1 className="text-5xl md:text-6xl font-bold mt-6 mb-4 text-white">
                     Fortune Carbon Removal Fund
                   </h1>
                 </div>
                 
-                <p className="text-2xl md:text-3xl font-semibold max-w-3xl mx-auto text-foreground leading-tight animate-fade-in" style={{
+                <p className="text-2xl md:text-3xl font-semibold max-w-3xl mx-auto text-white leading-tight animate-fade-in" style={{
                 animationDelay: '0.4s'
               }}>
                   Invista na transição climática com lastro em créditos de carbono reais da Amazônia
                 </p>
                 
-                <p className="mt-4 text-base md:text-lg max-w-3xl mx-auto text-muted-foreground leading-relaxed animate-fade-in" style={{
+                <p className="mt-4 text-base md:text-lg max-w-3xl mx-auto text-white leading-relaxed animate-fade-in" style={{
                 animationDelay: '0.6s'
               }}>
                   Fiagro focado em créditos de carbono e CPRs que conecta o
@@ -163,7 +163,7 @@ const Index = () => {
                 Toque na tela para simular seu investimento
               </button>
 
-              <p className="text-xs max-w-2xl mx-auto text-muted-foreground leading-relaxed relative z-10 animate-fade-in" style={{
+              <p className="text-xs max-w-2xl mx-auto text-white leading-relaxed relative z-10 animate-fade-in" style={{
               animationDelay: '1.2s'
             }}>
                 Material publicitário. Não constitui oferta pública de valores
