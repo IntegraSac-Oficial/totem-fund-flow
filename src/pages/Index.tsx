@@ -106,9 +106,7 @@ const Index = () => {
                   <span className="text-2xl font-bold text-primary">FG</span>
                 </div>
                 
-                <div className="h-14 w-14 rounded-xl bg-green-500/20 border-2 border-green-500/30 flex items-center justify-center backdrop-blur-sm hover-scale">
-                  <span className="text-xs font-bold text-green-400">ESG</span>
-                </div>
+                
               </div>
               
               <div className="relative z-10 space-y-6">
