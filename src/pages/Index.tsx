@@ -106,7 +106,7 @@ const Index = () => {
                 <img 
                   src={logoFortune} 
                   alt="Fortune Carbon Removal Fund" 
-                  className="h-20 w-auto hover-scale"
+                  className="h-28 w-auto hover-scale"
                 />
               </div>
               
