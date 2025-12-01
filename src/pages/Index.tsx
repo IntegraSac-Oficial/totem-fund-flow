@@ -20,6 +20,7 @@ const INACTIVITY_TIMEOUT_MS = 90_000; // 90s sem tocar volta pra tela 0
 
 const Index = () => {
   const [step, setStep] = useState<number>(0);
+  const [direction, setDirection] = useState<"forward" | "backward">("forward");
   const [lead, setLead] = useState<LeadData>({
     investorType: null,
     ticketRange: null,
@@ -63,8 +64,15 @@ const Index = () => {
     };
   }, []);
 
-  const next = () => setStep((s) => s + 1);
-  const back = () => setStep((s) => Math.max(0, s - 1));
+  const next = () => {
+    setDirection("forward");
+    setStep((s) => s + 1);
+  };
+  
+  const back = () => {
+    setDirection("backward");
+    setStep((s) => Math.max(0, s - 1));
+  };
 
   const handleSubmitLead = async () => {
     try {
@@ -89,7 +97,7 @@ const Index = () => {
       case 0:
         return (
           <ScreenContainer>
-            <div className="flex flex-col items-center justify-center text-center gap-8 relative">
+            <div className="flex flex-col items-center justify-center text-center gap-8 relative animate-fade-in">
               <div 
                 className="absolute inset-0 opacity-20 bg-cover bg-center rounded-3xl"
                 style={{ backgroundImage: `url(${heroCarbon})` }}
@@ -109,15 +117,15 @@ const Index = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full relative z-10">
-                <HighlightCard title="R$ 500 milhões">
+                <HighlightCard title="R$ 500 milhões" delay="100">
                   Tamanho alvo da oferta, com foco em ativos de alta integridade
                   climática.
                 </HighlightCard>
-                <HighlightCard title="Créditos certificados">
+                <HighlightCard title="Créditos certificados" delay="200">
                   Exposição a créditos de carbono certificados por padrões
                   reconhecidos globalmente.
                 </HighlightCard>
-                <HighlightCard title="Impacto climático real">
+                <HighlightCard title="Impacto climático real" delay="300">
                   Potencial de proteger florestas, remover CO₂ e beneficiar
                   milhares de famílias.
                 </HighlightCard>
@@ -148,21 +156,21 @@ const Index = () => {
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-10">
-              <InfoCard title="O que é o fundo">
+              <InfoCard title="O que é o fundo" delay="0">
                 Fiagro estruturado para investir em créditos de carbono
                 certificados e CPRs, unindo retorno financeiro e impacto
                 ambiental.
               </InfoCard>
-              <InfoCard title="Papel do fundo">
+              <InfoCard title="Papel do fundo" delay="100">
                 Conectar produtores, projetos sustentáveis e capital
                 institucional, ajudando empresas e investidores a viabilizar a
                 transição para uma economia de baixo carbono.
               </InfoCard>
-              <InfoCard title="Governança">
+              <InfoCard title="Governança" delay="200">
                 Gestão profissional da SFI Investimentos, com consultoria
                 técnica da FortuneGroup S.A. em créditos de carbono e ESG.
               </InfoCard>
-              <InfoCard title="Regulação e integridade">
+              <InfoCard title="Regulação e integridade" delay="300">
                 Alinhado à regulação climática brasileira, SBCE e padrões
                 internacionais de alta integridade.
               </InfoCard>
@@ -181,16 +189,16 @@ const Index = () => {
             />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-10">
-              <InfoCard title="Brasil protagonista">
+              <InfoCard title="Brasil protagonista" delay="0">
                 Capacidade única de geração de créditos de carbono, com
                 biomas estratégicos e cadeias produtivas ligadas ao
                 agronegócio sustentável.
               </InfoCard>
-              <InfoCard title="Mercado em expansão">
+              <InfoCard title="Mercado em expansão" delay="150">
                 À medida que empresas assumem compromissos Net Zero, cresce a
                 demanda por créditos de carbono de alta integridade.
               </InfoCard>
-              <InfoCard title="Fiagro como ponte">
+              <InfoCard title="Fiagro como ponte" delay="300">
                 O fundo conecta projetos, produtores e investidores,
                 transformando ativos ambientais em retorno financeiro e impacto
                 climático.
@@ -210,20 +218,20 @@ const Index = () => {
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-10">
-              <InfoCard title="Créditos de carbono">
+              <InfoCard title="Créditos de carbono" delay="0">
                 Exposição a créditos performados e em desenvolvimento, emitidos
                 por padrões reconhecidos internacionalmente.
               </InfoCard>
-              <InfoCard title="CPRs sustentáveis">
+              <InfoCard title="CPRs sustentáveis" delay="100">
                 Direitos creditórios do agronegócio vinculados a cadeias
                 produtivas de baixo carbono, reflorestamento e práticas
                 regenerativas.
               </InfoCard>
-              <InfoCard title="Retorno + impacto">
+              <InfoCard title="Retorno + impacto" delay="200">
                 Combinação de geração de renda, potencial de valorização de
                 ativos e impacto socioambiental com métricas claras.
               </InfoCard>
-              <InfoCard title="Governança robusta">
+              <InfoCard title="Governança robusta" delay="300">
                 Comitês, políticas de risco e diligência técnica para seleção e
                 acompanhamento dos projetos e ativos da carteira.
               </InfoCard>
@@ -242,19 +250,19 @@ const Index = () => {
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-10">
-              <InfoCard title="Carteira performada">
+              <InfoCard title="Carteira performada" delay="0">
                 Créditos de carbono já emitidos e certificados, com foco em
                 liquidez e geração de renda recorrente por meio de operações de
                 venda e recompra.
               </InfoCard>
-              <InfoCard title="Carteira a performar">
+              <InfoCard title="Carteira a performar" delay="150">
                 Projetos REDD+, reflorestamento, carbono azul, biochar e
                 agricultura regenerativa, com potencial de valorização no
                 médio prazo.
               </InfoCard>
             </div>
 
-            <div className="max-w-4xl mx-auto mt-12 p-8 rounded-2xl bg-card border border-border">
+            <div className="max-w-4xl mx-auto mt-12 p-8 rounded-2xl bg-card border border-border animate-fade-in" style={{ animationDelay: "300ms" }}>
               <h3 className="text-2xl font-semibold mb-6 text-center text-foreground">
                 Tipologias e frentes de atuação
               </h3>
@@ -287,7 +295,7 @@ const Index = () => {
               subtitle="Selecione a faixa de aporte e horizonte de investimento que fazem sentido para você."
             />
 
-            <div className="max-w-4xl mx-auto mt-10 space-y-10">
+            <div className="max-w-4xl mx-auto mt-10 space-y-10 animate-fade-in">
               <div>
                 <h3 className="text-xl font-semibold mb-4 text-foreground">
                   Você é:
@@ -419,7 +427,7 @@ const Index = () => {
               subtitle="Preencha seus dados para receber o material do fundo e contato da nossa equipe."
             />
 
-            <div className="max-w-2xl mx-auto mt-10">
+            <div className="max-w-2xl mx-auto mt-10 animate-fade-in">
               {!qrUrl ? (
                 <div className="space-y-6">
                   <InputField
@@ -508,7 +516,16 @@ const Index = () => {
 
   return (
     <div className="w-screen h-screen bg-background text-foreground overflow-hidden">
-      {renderStep()}
+      <div 
+        key={step}
+        className={`w-full h-full ${
+          direction === "forward" 
+            ? "animate-fade-in" 
+            : "animate-fade-in"
+        }`}
+      >
+        {renderStep()}
+      </div>
     </div>
   );
 };
@@ -572,7 +589,7 @@ interface SectionTitleProps {
 }
 
 const SectionTitle = ({ title, subtitle }: SectionTitleProps) => (
-  <div className="text-center max-w-4xl mx-auto mb-8">
+  <div className="text-center max-w-4xl mx-auto mb-8 animate-fade-in">
     <h2 className="text-4xl md:text-5xl font-bold text-foreground">{title}</h2>
     {subtitle && (
       <p className="mt-4 text-lg md:text-xl text-muted-foreground leading-relaxed">{subtitle}</p>
@@ -583,12 +600,17 @@ const SectionTitle = ({ title, subtitle }: SectionTitleProps) => (
 interface HighlightCardProps {
   title: string;
   children: React.ReactNode;
+  delay?: string;
 }
 const HighlightCard = ({
   title,
   children,
+  delay = "0",
 }: HighlightCardProps) => (
-  <div className="p-6 rounded-2xl border border-primary/30 bg-card/80 backdrop-blur shadow-lg hover:shadow-xl transition-shadow">
+  <div 
+    className="p-6 rounded-2xl border border-primary/30 bg-card/80 backdrop-blur shadow-lg hover:shadow-xl transition-all animate-fade-in hover-scale"
+    style={{ animationDelay: `${delay}ms` }}
+  >
     <h3 className="text-xl font-semibold mb-3 text-foreground">{title}</h3>
     <p className="text-sm text-muted-foreground leading-relaxed">{children}</p>
   </div>
@@ -597,9 +619,13 @@ const HighlightCard = ({
 interface InfoCardProps {
   title: string;
   children: React.ReactNode;
+  delay?: string;
 }
-const InfoCard = ({ title, children }: InfoCardProps) => (
-  <div className="p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition-colors">
+const InfoCard = ({ title, children, delay = "0" }: InfoCardProps) => (
+  <div 
+    className="p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all animate-fade-in hover-scale"
+    style={{ animationDelay: `${delay}ms` }}
+  >
     <h3 className="text-lg md:text-xl font-semibold mb-3 text-foreground">{title}</h3>
     <p className="text-sm text-muted-foreground leading-relaxed">{children}</p>
   </div>
