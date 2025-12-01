@@ -98,7 +98,7 @@ const Index = () => {
       case 0:
         return <ScreenContainer>
             <div className="flex flex-col items-center justify-center text-center gap-8 relative animate-fade-in">
-              <div className="fixed inset-0 -z-10 bg-cover bg-center animate-[zoom-pan_20s_ease-in-out_infinite]" style={{
+              <div className="absolute inset-0 bg-cover bg-center animate-[zoom-pan_20s_ease-in-out_infinite]" style={{
               backgroundImage: `url(${amazonForest})`
             }} />
               
