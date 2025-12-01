@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import heroCarbon from "@/assets/hero-carbon.jpg";
+import logoFortune from "@/assets/logo-fortune.png";
 import { useSoundFeedback } from "@/hooks/useSoundFeedback";
 type InvestorType = "PF" | "PJ" | "INST" | null;
 type TicketRange = "0-100" | "100-500" | "500-2000" | "2000+" | null;
@@ -100,13 +101,13 @@ const Index = () => {
               backgroundImage: `url(${heroCarbon})`
             }} />
               
-              {/* Logos e selos */}
-              <div className="flex items-center justify-center gap-6 mb-2 relative z-10 animate-scale-in">
-                <div className="h-16 w-16 rounded-2xl bg-primary/20 border-2 border-primary/30 flex items-center justify-center backdrop-blur-sm hover-scale">
-                  <span className="text-2xl font-bold text-primary">FG</span>
-                </div>
-                
-                
+              {/* Logo Principal */}
+              <div className="flex items-center justify-center mb-2 relative z-10 animate-scale-in">
+                <img 
+                  src={logoFortune} 
+                  alt="Fortune Carbon Removal Fund" 
+                  className="h-20 w-auto hover-scale"
+                />
               </div>
               
               <div className="relative z-10 space-y-6">
