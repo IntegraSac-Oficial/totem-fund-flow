@@ -63,36 +63,36 @@ export default {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
-   		keyframes: {
-   			'accordion-down': {
-   				from: {
-   					height: '0'
-   				},
-   				to: {
-   					height: 'var(--radix-accordion-content-height)'
-   				}
-   			},
-   			'accordion-up': {
-   				from: {
-   					height: 'var(--radix-accordion-content-height)'
-   				},
-   				to: {
-   					height: '0'
-   				}
-   			},
-   			'zoom-pan': {
-   				'0%, 100%': {
-   					transform: 'scale(1) translate(0, 0)'
-   				},
-   				'50%': {
-   					transform: 'scale(1.1) translate(-2%, -2%)'
-   				}
-   			}
-   		},
-   		animation: {
-   			'accordion-down': 'accordion-down 0.2s ease-out',
-   			'accordion-up': 'accordion-up 0.2s ease-out'
-   		},
+  		keyframes: {
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
+  			},
+  			'zoom-pan': {
+  				'0%, 100%': {
+  					transform: 'scale(1) translate(0, 0)'
+  				},
+  				'50%': {
+  					transform: 'scale(1.1) translate(-2%, -2%)'
+  				}
+  			}
+  		},
+  		animation: {
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
+  		},
   		boxShadow: {
   			'2xs': 'var(--shadow-2xs)',
   			xs: 'var(--shadow-xs)',
@@ -104,20 +104,17 @@ export default {
   		},
   		fontFamily: {
   			sans: [
-  				'Work Sans',
+  				'Inter',
   				'ui-sans-serif',
   				'system-ui',
-  				'-apple-system',
-  				'BlinkMacSystemFont',
-  				'Segoe UI',
-  				'Roboto',
-  				'Helvetica Neue',
-  				'Arial',
-  				'Noto Sans',
-  				'sans-serif'
+  				'sans-serif',
+  				'Apple Color Emoji',
+  				'Segoe UI Emoji',
+  				'Segoe UI Symbol',
+  				'Noto Color Emoji'
   			],
   			serif: [
-  				'Lora',
+  				'Crimson Text',
   				'ui-serif',
   				'Georgia',
   				'Cambria',
@@ -126,7 +123,7 @@ export default {
   				'serif'
   			],
   			mono: [
-  				'Inconsolata',
+  				'IBM Plex Mono',
   				'ui-monospace',
   				'SFMono-Regular',
   				'Menlo',
