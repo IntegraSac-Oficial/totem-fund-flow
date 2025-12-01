@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import heroCarbon from "@/assets/hero-carbon.jpg";
+import amazonForest from "@/assets/amazon-forest.jpg";
 import logoFortune from "@/assets/logo-fortune.png";
 import { useSoundFeedback } from "@/hooks/useSoundFeedback";
 type InvestorType = "PF" | "PJ" | "INST" | null;
@@ -97,8 +98,8 @@ const Index = () => {
       case 0:
         return <ScreenContainer>
             <div className="flex flex-col items-center justify-center text-center gap-8 relative animate-fade-in">
-              <div className="absolute inset-0 opacity-20 bg-cover bg-center rounded-3xl" style={{
-              backgroundImage: `url(${heroCarbon})`
+              <div className="absolute inset-0 opacity-30 bg-cover bg-center rounded-3xl" style={{
+              backgroundImage: `url(${amazonForest})`
             }} />
               
               {/* Logo Principal */}
