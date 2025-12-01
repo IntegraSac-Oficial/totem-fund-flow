@@ -102,7 +102,7 @@ const Index = () => {
             }} />
               
               {/* Logo Principal */}
-              <div className="flex items-center justify-center mb-2 relative z-10 animate-scale-in">
+              <div className="flex items-center justify-center mb-2 relative z-10 animate-scale-in pt-8 px-8">
                 <img 
                   src={logoFortune} 
                   alt="Fortune Carbon Removal Fund" 
