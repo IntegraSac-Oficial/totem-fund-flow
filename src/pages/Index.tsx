@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import heroCarbon from "@/assets/hero-carbon.jpg";
 import { useSoundFeedback } from "@/hooks/useSoundFeedback";
-
 type InvestorType = "PF" | "PJ" | "INST" | null;
 type TicketRange = "0-100" | "100-500" | "500-2000" | "2000+" | null;
 type Horizon = "2-" | "3-5" | "5+" | null;
-
 interface LeadData {
   investorType: InvestorType;
   ticketRange: TicketRange;
@@ -16,7 +14,6 @@ interface LeadData {
   whatsapp: string;
   country: string;
 }
-
 const INACTIVITY_TIMEOUT_MS = 90_000; // 90s sem tocar volta pra tela 0
 
 const Index = () => {
@@ -29,15 +26,19 @@ const Index = () => {
     name: "",
     email: "",
     whatsapp: "",
-    country: "",
+    country: ""
   });
   const [qrUrl, setQrUrl] = useState<string | null>(null);
-  const { playNext: playSoundNext, playBack: playSoundBack, playSelect, playSubmit } = useSoundFeedback();
+  const {
+    playNext: playSoundNext,
+    playBack: playSoundBack,
+    playSelect,
+    playSubmit
+  } = useSoundFeedback();
 
   // --- Controle de inatividade para totem ---
   useEffect(() => {
     let timer: number;
-
     const resetTimer = () => {
       if (timer) window.clearTimeout(timer);
       timer = window.setTimeout(() => {
@@ -49,35 +50,29 @@ const Index = () => {
           name: "",
           email: "",
           whatsapp: "",
-          country: "",
+          country: ""
         });
         setQrUrl(null);
       }, INACTIVITY_TIMEOUT_MS);
     };
-
     resetTimer();
-
     const events = ["click", "touchstart", "keydown"];
-    events.forEach((ev) => window.addEventListener(ev, resetTimer));
-
+    events.forEach(ev => window.addEventListener(ev, resetTimer));
     return () => {
       if (timer) window.clearTimeout(timer);
-      events.forEach((ev) => window.removeEventListener(ev, resetTimer));
+      events.forEach(ev => window.removeEventListener(ev, resetTimer));
     };
   }, []);
-
   const next = () => {
     playSoundNext();
     setDirection("forward");
-    setStep((s) => s + 1);
+    setStep(s => s + 1);
   };
-  
   const back = () => {
     playSoundBack();
     setDirection("backward");
-    setStep((s) => Math.max(0, s - 1));
+    setStep(s => Math.max(0, s - 1));
   };
-
   const handleSubmitLead = async () => {
     try {
       playSubmit();
@@ -96,33 +91,30 @@ const Index = () => {
       alert("Não foi possível enviar seus dados. Tente novamente.");
     }
   };
-
   const renderStep = () => {
     switch (step) {
       case 0:
-        return (
-          <ScreenContainer>
+        return <ScreenContainer>
             <div className="flex flex-col items-center justify-center text-center gap-8 relative animate-fade-in">
-              <div 
-                className="absolute inset-0 opacity-20 bg-cover bg-center rounded-3xl"
-                style={{ backgroundImage: `url(${heroCarbon})` }}
-              />
+              <div className="absolute inset-0 opacity-20 bg-cover bg-center rounded-3xl" style={{
+              backgroundImage: `url(${heroCarbon})`
+            }} />
               
               {/* Logos e selos */}
               <div className="flex items-center justify-center gap-6 mb-2 relative z-10 animate-scale-in">
                 <div className="h-16 w-16 rounded-2xl bg-primary/20 border-2 border-primary/30 flex items-center justify-center backdrop-blur-sm hover-scale">
                   <span className="text-2xl font-bold text-primary">FG</span>
                 </div>
-                <div className="h-14 w-14 rounded-xl bg-blue-500/20 border-2 border-blue-500/30 flex items-center justify-center backdrop-blur-sm hover-scale">
-                  <span className="text-xs font-bold text-blue-400">COP30</span>
-                </div>
+                
                 <div className="h-14 w-14 rounded-xl bg-green-500/20 border-2 border-green-500/30 flex items-center justify-center backdrop-blur-sm hover-scale">
                   <span className="text-xs font-bold text-green-400">ESG</span>
                 </div>
               </div>
               
               <div className="relative z-10 space-y-6">
-                <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                <div className="animate-fade-in" style={{
+                animationDelay: '0.2s'
+              }}>
                   <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground font-medium">
                     FortuneGroup S.A. &amp; SFI Investimentos
                   </p>
@@ -131,17 +123,23 @@ const Index = () => {
                   </h1>
                 </div>
                 
-                <p className="text-2xl md:text-3xl font-semibold max-w-3xl mx-auto text-foreground leading-tight animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                <p className="text-2xl md:text-3xl font-semibold max-w-3xl mx-auto text-foreground leading-tight animate-fade-in" style={{
+                animationDelay: '0.4s'
+              }}>
                   Invista na transição climática com lastro em créditos de carbono reais da Amazônia
                 </p>
                 
-                <p className="mt-4 text-base md:text-lg max-w-3xl mx-auto text-muted-foreground leading-relaxed animate-fade-in" style={{ animationDelay: '0.6s' }}>
+                <p className="mt-4 text-base md:text-lg max-w-3xl mx-auto text-muted-foreground leading-relaxed animate-fade-in" style={{
+                animationDelay: '0.6s'
+              }}>
                   Fiagro focado em créditos de carbono e CPRs que conecta o
                   agronegócio brasileiro à economia de baixo carbono.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full relative z-10 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full relative z-10 animate-fade-in" style={{
+              animationDelay: '0.8s'
+            }}>
                 <HighlightCard title="R$ 500 milhões" delay="100">
                   Tamanho alvo da oferta, com foco em ativos de alta integridade
                   climática.
@@ -156,33 +154,27 @@ const Index = () => {
                 </HighlightCard>
               </div>
 
-              <button
-                onClick={() => {
-                  playSoundNext();
-                  setStep(1);
-                }}
-                className="relative z-10 px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 pulse animate-fade-in"
-                style={{ animationDelay: '1s' }}
-              >
+              <button onClick={() => {
+              playSoundNext();
+              setStep(1);
+            }} className="relative z-10 px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 pulse animate-fade-in" style={{
+              animationDelay: '1s'
+            }}>
                 Toque na tela para simular seu investimento
               </button>
 
-              <p className="text-xs max-w-2xl mx-auto text-muted-foreground leading-relaxed relative z-10 animate-fade-in" style={{ animationDelay: '1.2s' }}>
+              <p className="text-xs max-w-2xl mx-auto text-muted-foreground leading-relaxed relative z-10 animate-fade-in" style={{
+              animationDelay: '1.2s'
+            }}>
                 Material publicitário. Não constitui oferta pública de valores
                 mobiliários. Leia o regulamento e demais documentos oficiais
                 antes de investir.
               </p>
             </div>
-          </ScreenContainer>
-        );
-
+          </ScreenContainer>;
       case 1:
-        return (
-          <ScreenContainer showBack={true} onBack={back}>
-            <SectionTitle
-              title="Bem-vindo ao Fortune Carbon Removal Fund"
-              subtitle="Conheça em poucos passos como o fundo conecta agronegócio, créditos de carbono e impacto climático mensurável."
-            />
+        return <ScreenContainer showBack={true} onBack={back}>
+            <SectionTitle title="Bem-vindo ao Fortune Carbon Removal Fund" subtitle="Conheça em poucos passos como o fundo conecta agronegócio, créditos de carbono e impacto climático mensurável." />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-10">
               <InfoCard title="O que é o fundo" delay="0">
@@ -206,16 +198,10 @@ const Index = () => {
             </div>
 
             <FooterButtons onNext={next} />
-          </ScreenContainer>
-        );
-
+          </ScreenContainer>;
       case 2:
-        return (
-          <ScreenContainer showBack={true} onBack={back}>
-            <SectionTitle
-              title="Por que o Brasil e por que agora?"
-              subtitle="A década decisiva da ação climática e o papel dos créditos de carbono na transição para uma economia de baixo carbono."
-            />
+        return <ScreenContainer showBack={true} onBack={back}>
+            <SectionTitle title="Por que o Brasil e por que agora?" subtitle="A década decisiva da ação climática e o papel dos créditos de carbono na transição para uma economia de baixo carbono." />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-10">
               <InfoCard title="Brasil protagonista" delay="0">
@@ -235,16 +221,10 @@ const Index = () => {
             </div>
 
             <FooterButtons onNext={next} />
-          </ScreenContainer>
-        );
-
+          </ScreenContainer>;
       case 3:
-        return (
-          <ScreenContainer showBack={true} onBack={back}>
-            <SectionTitle
-              title="O que o fundo faz na prática?"
-              subtitle="Uma carteira voltada a créditos de carbono certificados e CPRs ligados a projetos sustentáveis."
-            />
+        return <ScreenContainer showBack={true} onBack={back}>
+            <SectionTitle title="O que o fundo faz na prática?" subtitle="Uma carteira voltada a créditos de carbono certificados e CPRs ligados a projetos sustentáveis." />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-10">
               <InfoCard title="Créditos de carbono" delay="0">
@@ -267,16 +247,10 @@ const Index = () => {
             </div>
 
             <FooterButtons onNext={next} />
-          </ScreenContainer>
-        );
-
+          </ScreenContainer>;
       case 4:
-        return (
-          <ScreenContainer showBack={true} onBack={back}>
-            <SectionTitle
-              title="Como estruturamos a carteira"
-              subtitle="Equilíbrio entre ativos já performados e projetos em desenvolvimento."
-            />
+        return <ScreenContainer showBack={true} onBack={back}>
+            <SectionTitle title="Como estruturamos a carteira" subtitle="Equilíbrio entre ativos já performados e projetos em desenvolvimento." />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-10">
               <InfoCard title="Carteira performada" delay="0">
@@ -291,38 +265,25 @@ const Index = () => {
               </InfoCard>
             </div>
 
-            <div className="max-w-4xl mx-auto mt-12 p-8 rounded-2xl bg-card border border-border animate-fade-in" style={{ animationDelay: "300ms" }}>
+            <div className="max-w-4xl mx-auto mt-12 p-8 rounded-2xl bg-card border border-border animate-fade-in" style={{
+            animationDelay: "300ms"
+          }}>
               <h3 className="text-2xl font-semibold mb-6 text-center text-foreground">
                 Tipologias e frentes de atuação
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {[
-                  "REDD+ e conservação florestal",
-                  "Reflorestamento e ARR",
-                  "Carbono azul",
-                  "Biochar",
-                  "Energia limpa",
-                  "Agricultura regenerativa"
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-2">
+                {["REDD+ e conservação florestal", "Reflorestamento e ARR", "Carbono azul", "Biochar", "Energia limpa", "Agricultura regenerativa"].map(item => <div key={item} className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-primary" />
                     <span className="text-sm text-muted-foreground">{item}</span>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
 
             <FooterButtons onNext={next} />
-          </ScreenContainer>
-        );
-
+          </ScreenContainer>;
       case 5:
-        return (
-          <ScreenContainer showBack={true} onBack={back}>
-            <SectionTitle
-              title="Simule seu perfil de investimento e impacto"
-              subtitle="Selecione a faixa de aporte e horizonte de investimento que fazem sentido para você."
-            />
+        return <ScreenContainer showBack={true} onBack={back}>
+            <SectionTitle title="Simule seu perfil de investimento e impacto" subtitle="Selecione a faixa de aporte e horizonte de investimento que fazem sentido para você." />
 
             <div className="max-w-4xl mx-auto mt-10 space-y-10 animate-fade-in">
               <div>
@@ -330,31 +291,31 @@ const Index = () => {
                   Você é:
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <ChoiceButton
-                    selected={lead.investorType === "PF"}
-                    onClick={() => {
-                      playSelect();
-                      setLead((l) => ({ ...l, investorType: "PF" }));
-                    }}
-                  >
+                  <ChoiceButton selected={lead.investorType === "PF"} onClick={() => {
+                  playSelect();
+                  setLead(l => ({
+                    ...l,
+                    investorType: "PF"
+                  }));
+                }}>
                     Pessoa Física
                   </ChoiceButton>
-                  <ChoiceButton
-                    selected={lead.investorType === "PJ"}
-                    onClick={() => {
-                      playSelect();
-                      setLead((l) => ({ ...l, investorType: "PJ" }));
-                    }}
-                  >
+                  <ChoiceButton selected={lead.investorType === "PJ"} onClick={() => {
+                  playSelect();
+                  setLead(l => ({
+                    ...l,
+                    investorType: "PJ"
+                  }));
+                }}>
                     Pessoa Jurídica
                   </ChoiceButton>
-                  <ChoiceButton
-                    selected={lead.investorType === "INST"}
-                    onClick={() => {
-                      playSelect();
-                      setLead((l) => ({ ...l, investorType: "INST" }));
-                    }}
-                  >
+                  <ChoiceButton selected={lead.investorType === "INST"} onClick={() => {
+                  playSelect();
+                  setLead(l => ({
+                    ...l,
+                    investorType: "INST"
+                  }));
+                }}>
                     Family office / Institucional
                   </ChoiceButton>
                 </div>
@@ -365,40 +326,40 @@ const Index = () => {
                   Faixa de aporte que você considera:
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <ChoiceButton
-                    selected={lead.ticketRange === "0-100"}
-                    onClick={() => {
-                      playSelect();
-                      setLead((l) => ({ ...l, ticketRange: "0-100" }));
-                    }}
-                  >
+                  <ChoiceButton selected={lead.ticketRange === "0-100"} onClick={() => {
+                  playSelect();
+                  setLead(l => ({
+                    ...l,
+                    ticketRange: "0-100"
+                  }));
+                }}>
                     Até R$ 100 mil
                   </ChoiceButton>
-                  <ChoiceButton
-                    selected={lead.ticketRange === "100-500"}
-                    onClick={() => {
-                      playSelect();
-                      setLead((l) => ({ ...l, ticketRange: "100-500" }));
-                    }}
-                  >
+                  <ChoiceButton selected={lead.ticketRange === "100-500"} onClick={() => {
+                  playSelect();
+                  setLead(l => ({
+                    ...l,
+                    ticketRange: "100-500"
+                  }));
+                }}>
                     R$ 100 mil – 500 mil
                   </ChoiceButton>
-                  <ChoiceButton
-                    selected={lead.ticketRange === "500-2000"}
-                    onClick={() => {
-                      playSelect();
-                      setLead((l) => ({ ...l, ticketRange: "500-2000" }));
-                    }}
-                  >
+                  <ChoiceButton selected={lead.ticketRange === "500-2000"} onClick={() => {
+                  playSelect();
+                  setLead(l => ({
+                    ...l,
+                    ticketRange: "500-2000"
+                  }));
+                }}>
                     R$ 500 mil – 2 milhões
                   </ChoiceButton>
-                  <ChoiceButton
-                    selected={lead.ticketRange === "2000+"}
-                    onClick={() => {
-                      playSelect();
-                      setLead((l) => ({ ...l, ticketRange: "2000+" }));
-                    }}
-                  >
+                  <ChoiceButton selected={lead.ticketRange === "2000+"} onClick={() => {
+                  playSelect();
+                  setLead(l => ({
+                    ...l,
+                    ticketRange: "2000+"
+                  }));
+                }}>
                     Acima de R$ 2 milhões
                   </ChoiceButton>
                 </div>
@@ -409,31 +370,31 @@ const Index = () => {
                   Horizonte de investimento:
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <ChoiceButton
-                    selected={lead.horizon === "2-"}
-                    onClick={() => {
-                      playSelect();
-                      setLead((l) => ({ ...l, horizon: "2-" }));
-                    }}
-                  >
+                  <ChoiceButton selected={lead.horizon === "2-"} onClick={() => {
+                  playSelect();
+                  setLead(l => ({
+                    ...l,
+                    horizon: "2-"
+                  }));
+                }}>
                     Até 2 anos
                   </ChoiceButton>
-                  <ChoiceButton
-                    selected={lead.horizon === "3-5"}
-                    onClick={() => {
-                      playSelect();
-                      setLead((l) => ({ ...l, horizon: "3-5" }));
-                    }}
-                  >
+                  <ChoiceButton selected={lead.horizon === "3-5"} onClick={() => {
+                  playSelect();
+                  setLead(l => ({
+                    ...l,
+                    horizon: "3-5"
+                  }));
+                }}>
                     3 – 5 anos
                   </ChoiceButton>
-                  <ChoiceButton
-                    selected={lead.horizon === "5+"}
-                    onClick={() => {
-                      playSelect();
-                      setLead((l) => ({ ...l, horizon: "5+" }));
-                    }}
-                  >
+                  <ChoiceButton selected={lead.horizon === "5+"} onClick={() => {
+                  playSelect();
+                  setLead(l => ({
+                    ...l,
+                    horizon: "5+"
+                  }));
+                }}>
                     Acima de 5 anos
                   </ChoiceButton>
                 </div>
@@ -455,50 +416,29 @@ const Index = () => {
             </div>
 
             <FooterButtons onNext={next} />
-          </ScreenContainer>
-        );
-
+          </ScreenContainer>;
       case 6:
-        return (
-          <ScreenContainer showBack={true} onBack={back}>
-            <SectionTitle
-              title="Receba o teaser completo e próximos passos"
-              subtitle="Preencha seus dados para receber o material do fundo e contato da nossa equipe."
-            />
+        return <ScreenContainer showBack={true} onBack={back}>
+            <SectionTitle title="Receba o teaser completo e próximos passos" subtitle="Preencha seus dados para receber o material do fundo e contato da nossa equipe." />
 
             <div className="max-w-2xl mx-auto mt-10 animate-fade-in">
-              {!qrUrl ? (
-                <div className="space-y-6">
-                  <InputField
-                    label="Nome completo"
-                    value={lead.name}
-                    onChange={(e) =>
-                      setLead((l) => ({ ...l, name: e.target.value }))
-                    }
-                  />
-                  <InputField
-                    label="E-mail"
-                    type="email"
-                    value={lead.email}
-                    onChange={(e) =>
-                      setLead((l) => ({ ...l, email: e.target.value }))
-                    }
-                  />
-                  <InputField
-                    label="WhatsApp (com DDI)"
-                    placeholder="+55 11 99999-9999"
-                    value={lead.whatsapp}
-                    onChange={(e) =>
-                      setLead((l) => ({ ...l, whatsapp: e.target.value }))
-                    }
-                  />
-                  <InputField
-                    label="País / Estado"
-                    value={lead.country}
-                    onChange={(e) =>
-                      setLead((l) => ({ ...l, country: e.target.value }))
-                    }
-                  />
+              {!qrUrl ? <div className="space-y-6">
+                  <InputField label="Nome completo" value={lead.name} onChange={e => setLead(l => ({
+                ...l,
+                name: e.target.value
+              }))} />
+                  <InputField label="E-mail" type="email" value={lead.email} onChange={e => setLead(l => ({
+                ...l,
+                email: e.target.value
+              }))} />
+                  <InputField label="WhatsApp (com DDI)" placeholder="+55 11 99999-9999" value={lead.whatsapp} onChange={e => setLead(l => ({
+                ...l,
+                whatsapp: e.target.value
+              }))} />
+                  <InputField label="País / Estado" value={lead.country} onChange={e => setLead(l => ({
+                ...l,
+                country: e.target.value
+              }))} />
 
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     Ao avançar, você autoriza o uso dos dados fornecidos para
@@ -506,37 +446,24 @@ const Index = () => {
                   </p>
 
                   <div className="flex justify-center pt-4">
-                    <button
-                      onClick={handleSubmitLead}
-                      className="px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl"
-                    >
+                    <button onClick={handleSubmitLead} className="px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl">
                       Enviar dados e gerar acesso
                     </button>
                   </div>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center gap-8">
+                </div> : <div className="flex flex-col items-center gap-8">
                   <p className="text-center text-lg max-w-xl text-foreground leading-relaxed">
                     Obrigado! Escaneie o QR Code abaixo para acessar o teaser
                     e os próximos passos do Fortune Carbon Removal Fund.
                   </p>
                   
                   <div className="p-8 rounded-3xl bg-card border-2 border-primary/30 shadow-2xl">
-                    <QRCodeSVG 
-                      value={qrUrl} 
-                      size={256}
-                      level="H"
-                      includeMargin={true}
-                      fgColor="hsl(var(--foreground))"
-                      bgColor="hsl(var(--card))"
-                    />
+                    <QRCodeSVG value={qrUrl} size={256} level="H" includeMargin={true} fgColor="hsl(var(--foreground))" bgColor="hsl(var(--card))" />
                   </div>
 
                   <p className="text-sm text-center text-muted-foreground max-w-md">
                     Você também receberá o material por e-mail nos próximos minutos.
                   </p>
-                </div>
-              )}
+                </div>}
 
               <p className="mt-10 text-[10px] text-center text-muted-foreground leading-relaxed max-w-2xl mx-auto">
                 Material publicitário. Não constitui oferta ou recomendação de
@@ -545,30 +472,17 @@ const Index = () => {
                 passada não representa garantia de rentabilidade futura.
               </p>
             </div>
-          </ScreenContainer>
-        );
-
+          </ScreenContainer>;
       default:
         return null;
     }
   };
-
-  return (
-    <div className="w-screen h-screen bg-background text-foreground overflow-hidden">
-      <div 
-        key={step}
-        className={`w-full h-full ${
-          direction === "forward" 
-            ? "animate-fade-in" 
-            : "animate-fade-in"
-        }`}
-      >
+  return <div className="w-screen h-screen bg-background text-foreground overflow-hidden">
+      <div key={step} className={`w-full h-full ${direction === "forward" ? "animate-fade-in" : "animate-fade-in"}`}>
         {renderStep()}
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
 
 /* ----------------- COMPONENTES DE APOIO ----------------- */
@@ -578,14 +492,12 @@ interface ScreenProps {
   showBack?: boolean;
   onBack?: () => void;
 }
-
 const ScreenContainer = ({
   children,
   showBack,
-  onBack,
+  onBack
 }: ScreenProps) => {
-  return (
-    <div className="w-full h-full flex flex-col">
+  return <div className="w-full h-full flex flex-col">
       <header className="flex items-center justify-between px-8 py-6 border-b border-border bg-card/50 backdrop-blur">
         <div className="flex items-center gap-4">
           <div className="h-12 w-12 rounded-xl bg-primary flex items-center justify-center text-sm font-bold text-primary-foreground shadow-lg">
@@ -601,14 +513,9 @@ const ScreenContainer = ({
           </div>
         </div>
 
-        {showBack && onBack && (
-          <button
-            onClick={onBack}
-            className="text-sm px-6 py-3 rounded-xl border border-border hover:bg-accent transition-colors font-medium"
-          >
+        {showBack && onBack && <button onClick={onBack} className="text-sm px-6 py-3 rounded-xl border border-border hover:bg-accent transition-colors font-medium">
             ← Voltar
-          </button>
-        )}
+          </button>}
       </header>
 
       <main className="flex-1 px-6 md:px-12 py-8 overflow-auto">
@@ -618,24 +525,19 @@ const ScreenContainer = ({
           </div>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 interface SectionTitleProps {
   title: string;
   subtitle?: string;
 }
-
-const SectionTitle = ({ title, subtitle }: SectionTitleProps) => (
-  <div className="text-center max-w-4xl mx-auto mb-8 animate-fade-in">
+const SectionTitle = ({
+  title,
+  subtitle
+}: SectionTitleProps) => <div className="text-center max-w-4xl mx-auto mb-8 animate-fade-in">
     <h2 className="text-4xl md:text-5xl font-bold text-foreground">{title}</h2>
-    {subtitle && (
-      <p className="mt-4 text-lg md:text-xl text-muted-foreground leading-relaxed">{subtitle}</p>
-    )}
-  </div>
-);
-
+    {subtitle && <p className="mt-4 text-lg md:text-xl text-muted-foreground leading-relaxed">{subtitle}</p>}
+  </div>;
 interface HighlightCardProps {
   title: string;
   children: React.ReactNode;
@@ -644,60 +546,48 @@ interface HighlightCardProps {
 const HighlightCard = ({
   title,
   children,
-  delay = "0",
-}: HighlightCardProps) => (
-  <div 
-    className="p-6 rounded-2xl border border-primary/30 bg-card/80 backdrop-blur shadow-lg hover:shadow-xl transition-all animate-fade-in hover-scale"
-    style={{ animationDelay: `${delay}ms` }}
-  >
+  delay = "0"
+}: HighlightCardProps) => <div className="p-6 rounded-2xl border border-primary/30 bg-card/80 backdrop-blur shadow-lg hover:shadow-xl transition-all animate-fade-in hover-scale" style={{
+  animationDelay: `${delay}ms`
+}}>
     <h3 className="text-xl font-semibold mb-3 text-foreground">{title}</h3>
     <p className="text-sm text-muted-foreground leading-relaxed">{children}</p>
-  </div>
-);
-
+  </div>;
 interface InfoCardProps {
   title: string;
   children: React.ReactNode;
   delay?: string;
 }
-const InfoCard = ({ title, children, delay = "0" }: InfoCardProps) => (
-  <div 
-    className="p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all animate-fade-in hover-scale"
-    style={{ animationDelay: `${delay}ms` }}
-  >
+const InfoCard = ({
+  title,
+  children,
+  delay = "0"
+}: InfoCardProps) => <div className="p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all animate-fade-in hover-scale" style={{
+  animationDelay: `${delay}ms`
+}}>
     <h3 className="text-lg md:text-xl font-semibold mb-3 text-foreground">{title}</h3>
     <p className="text-sm text-muted-foreground leading-relaxed">{children}</p>
-  </div>
-);
-
+  </div>;
 interface FooterButtonsProps {
   onNext: () => void;
 }
-const FooterButtons = ({ onNext }: FooterButtonsProps) => (
-  <div className="mt-12 flex justify-center">
-    <button
-      onClick={onNext}
-      className="px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105"
-    >
+const FooterButtons = ({
+  onNext
+}: FooterButtonsProps) => <div className="mt-12 flex justify-center">
+    <button onClick={onNext} className="px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105">
       Continuar →
     </button>
-  </div>
-);
-
-interface InputFieldProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+  </div>;
+interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
 }
-const InputField = ({ label, ...props }: InputFieldProps) => (
-  <label className="block">
+const InputField = ({
+  label,
+  ...props
+}: InputFieldProps) => <label className="block">
     <span className="block mb-2 text-sm font-medium text-foreground">{label}</span>
-    <input
-      {...props}
-      className="w-full px-5 py-4 rounded-xl bg-card border border-input outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-muted-foreground"
-    />
-  </label>
-);
-
+    <input {...props} className="w-full px-5 py-4 rounded-xl bg-card border border-input outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-muted-foreground" />
+  </label>;
 interface ChoiceButtonProps {
   selected?: boolean;
   onClick?: () => void;
@@ -706,16 +596,7 @@ interface ChoiceButtonProps {
 const ChoiceButton = ({
   selected,
   onClick,
-  children,
-}: ChoiceButtonProps) => (
-  <button
-    onClick={onClick}
-    className={`px-6 py-4 rounded-xl text-base font-medium text-left border-2 transition-all ${
-      selected
-        ? "border-primary bg-primary/10 text-foreground shadow-lg"
-        : "border-border bg-card text-muted-foreground hover:bg-accent hover:border-primary/30"
-    }`}
-  >
+  children
+}: ChoiceButtonProps) => <button onClick={onClick} className={`px-6 py-4 rounded-xl text-base font-medium text-left border-2 transition-all ${selected ? "border-primary bg-primary/10 text-foreground shadow-lg" : "border-border bg-card text-muted-foreground hover:bg-accent hover:border-primary/30"}`}>
     {children}
-  </button>
-);
+  </button>;
