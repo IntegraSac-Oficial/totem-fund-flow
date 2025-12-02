@@ -498,27 +498,14 @@ const ScreenContainer = ({
   onBack
 }: ScreenProps) => {
   return <div className="w-full h-full flex flex-col">
-      <header className="flex items-center justify-between px-8 py-6 border-b border-border bg-card/50 backdrop-blur">
-        <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-xl bg-primary flex items-center justify-center text-sm font-bold text-primary-foreground shadow-lg">
-            FC
-          </div>
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-medium">
-              FortuneGroup S.A. &amp; SFI Investimentos
-            </p>
-            <p className="text-base font-semibold text-foreground">
-              Fortune Carbon Removal Fund
-            </p>
-          </div>
-        </div>
-
-        {showBack && onBack && <button onClick={onBack} className="text-sm px-6 py-3 rounded-xl border border-border hover:bg-accent transition-colors font-medium">
-            ← Voltar
-          </button>}
-      </header>
-
       <main className="flex-1 px-6 md:px-12 py-8 overflow-auto">
+        {showBack && onBack && (
+          <div className="mb-6">
+            <button onClick={onBack} className="text-sm px-6 py-3 rounded-xl border border-border hover:bg-accent transition-colors font-medium bg-card/50 backdrop-blur">
+              ← Voltar
+            </button>
+          </div>
+        )}
         <div className="w-full h-full flex items-center justify-center">
           <div className="w-full max-w-7xl mx-auto">
             {children}
