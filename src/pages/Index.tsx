@@ -96,82 +96,80 @@ const Index = () => {
   const renderStep = () => {
     switch (step) {
       case 0:
-        return <ScreenContainer>
-            <div className="flex flex-col items-center justify-center text-center gap-8 relative animate-fade-in">
-              <div className="absolute inset-0 bg-cover bg-center" style={{
+        return <div className="fixed inset-0 flex flex-col items-center justify-center text-center gap-8 animate-fade-in">
+            <div className="absolute inset-0 bg-cover bg-center" style={{
               backgroundImage: `url(${amazonForest})`
             }} />
               
-              {/* Logo Principal */}
-              <div className="flex items-center justify-center mb-2 relative z-10 animate-scale-in pt-8 px-8">
-                <img 
-                  src={logoFortune} 
-                  alt="Fortune Carbon Removal Fund" 
-                  className="h-20 w-auto hover-scale"
-                />
-              </div>
+            {/* Logo Principal */}
+            <div className="flex items-center justify-center mb-2 relative z-10 animate-scale-in pt-8 px-8">
+              <img 
+                src={logoFortune} 
+                alt="Fortune Carbon Removal Fund" 
+                className="h-20 w-auto hover-scale"
+              />
+            </div>
               
-              <div className="relative z-10 space-y-6">
-                <div className="animate-fade-in" style={{
+            <div className="relative z-10 space-y-6 px-6">
+              <div className="animate-fade-in" style={{
                 animationDelay: '0.2s'
               }}>
-                  <p className="text-xs uppercase tracking-[0.3em] text-white font-medium">
-                    FortuneGroup S.A. &amp; SFI Investimentos
-                  </p>
-                  <h1 className="text-5xl md:text-6xl font-bold mt-6 mb-4 text-white">
-                    Fortune Carbon Removal Fund
-                  </h1>
-                </div>
+                <p className="text-xs uppercase tracking-[0.3em] text-white font-medium">
+                  FortuneGroup S.A. &amp; SFI Investimentos
+                </p>
+                <h1 className="text-5xl md:text-6xl font-bold mt-6 mb-4 text-white">
+                  Fortune Carbon Removal Fund
+                </h1>
+              </div>
                 
-                <p className="text-2xl md:text-3xl font-semibold max-w-3xl mx-auto text-white leading-tight animate-fade-in" style={{
+              <p className="text-2xl md:text-3xl font-semibold max-w-3xl mx-auto text-white leading-tight animate-fade-in" style={{
                 animationDelay: '0.4s'
               }}>
-                  Invista na transição climática com lastro em créditos de carbono reais da Amazônia
-                </p>
+                Invista na transição climática com lastro em créditos de carbono reais da Amazônia
+              </p>
                 
-                <p className="mt-4 text-base md:text-lg max-w-3xl mx-auto text-white leading-relaxed animate-fade-in" style={{
+              <p className="mt-4 text-base md:text-lg max-w-3xl mx-auto text-white leading-relaxed animate-fade-in" style={{
                 animationDelay: '0.6s'
               }}>
-                  Fiagro focado em créditos de carbono e CPRs que conecta o
-                  agronegócio brasileiro à economia de baixo carbono.
-                </p>
-              </div>
+                Fiagro focado em créditos de carbono e CPRs que conecta o
+                agronegócio brasileiro à economia de baixo carbono.
+              </p>
+            </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full relative z-10 animate-fade-in" style={{
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full relative z-10 animate-fade-in px-6" style={{
               animationDelay: '0.8s'
             }}>
-                <HighlightCard title="R$ 500 milhões" delay="100">
-                  Tamanho alvo da oferta, com foco em ativos de alta integridade
-                  climática.
-                </HighlightCard>
-                <HighlightCard title="Créditos certificados" delay="200">
-                  Exposição a créditos de carbono certificados por padrões
-                  reconhecidos globalmente.
-                </HighlightCard>
-                <HighlightCard title="Impacto climático real" delay="300">
-                  Potencial de proteger florestas, remover CO₂ e beneficiar
-                  milhares de famílias.
-                </HighlightCard>
-              </div>
+              <HighlightCard title="R$ 500 milhões" delay="100">
+                Tamanho alvo da oferta, com foco em ativos de alta integridade
+                climática.
+              </HighlightCard>
+              <HighlightCard title="Créditos certificados" delay="200">
+                Exposição a créditos de carbono certificados por padrões
+                reconhecidos globalmente.
+              </HighlightCard>
+              <HighlightCard title="Impacto climático real" delay="300">
+                Potencial de proteger florestas, remover CO₂ e beneficiar
+                milhares de famílias.
+              </HighlightCard>
+            </div>
 
-              <button onClick={() => {
+            <button onClick={() => {
               playSoundNext();
               setStep(1);
             }} className="relative z-10 px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 pulse animate-fade-in" style={{
               animationDelay: '1s'
             }}>
-                Toque na tela para simular seu investimento
-              </button>
+              Toque na tela para simular seu investimento
+            </button>
 
-              <p className="text-xs max-w-2xl mx-auto text-white leading-relaxed relative z-10 animate-fade-in" style={{
+            <p className="text-xs max-w-2xl mx-auto text-white leading-relaxed relative z-10 animate-fade-in px-6" style={{
               animationDelay: '1.2s'
             }}>
-                Material publicitário. Não constitui oferta pública de valores
-                mobiliários. Leia o regulamento e demais documentos oficiais
-                antes de investir.
-              </p>
-            </div>
-          </ScreenContainer>;
+              Material publicitário. Não constitui oferta pública de valores
+              mobiliários. Leia o regulamento e demais documentos oficiais
+              antes de investir.
+            </p>
+          </div>;
       case 1:
         return <ScreenContainer showBack={true} onBack={back}>
             <SectionTitle title="Bem-vindo ao Fortune Carbon Removal Fund" subtitle="Conheça em poucos passos como o fundo conecta agronegócio, créditos de carbono e impacto climático mensurável." />
