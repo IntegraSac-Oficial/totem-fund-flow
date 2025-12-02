@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import heroCarbon from "@/assets/hero-carbon.jpg";
 import amazonForest from "@/assets/amazon-forest.jpg";
+import forestSunset from "@/assets/forest-sunset.jpg";
+import forestRiver from "@/assets/forest-river.jpg";
+import forestAerial from "@/assets/forest-aerial.jpg";
+import forestBoat from "@/assets/forest-boat.jpg";
 import logoFortune from "@/assets/logo-fortune.png";
 import { useSoundFeedback } from "@/hooks/useSoundFeedback";
 type InvestorType = "PF" | "PJ" | "INST" | null;
@@ -171,7 +175,7 @@ const Index = () => {
             </p>
           </div>;
       case 1:
-        return <ScreenContainer showBack={true} onBack={back}>
+        return <ScreenContainer showBack={true} onBack={back} backgroundImage={forestSunset}>
             <SectionTitle title="Bem-vindo ao Fortune Carbon Removal Fund" subtitle="Conheça em poucos passos como o fundo conecta agronegócio, créditos de carbono e impacto climático mensurável." />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-10">
@@ -198,7 +202,7 @@ const Index = () => {
             <FooterButtons onNext={next} />
           </ScreenContainer>;
       case 2:
-        return <ScreenContainer showBack={true} onBack={back}>
+        return <ScreenContainer showBack={true} onBack={back} backgroundImage={forestRiver}>
             <SectionTitle title="Por que o Brasil e por que agora?" subtitle="A década decisiva da ação climática e o papel dos créditos de carbono na transição para uma economia de baixo carbono." />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mt-10">
@@ -221,7 +225,7 @@ const Index = () => {
             <FooterButtons onNext={next} />
           </ScreenContainer>;
       case 3:
-        return <ScreenContainer showBack={true} onBack={back}>
+        return <ScreenContainer showBack={true} onBack={back} backgroundImage={forestAerial}>
             <SectionTitle title="O que o fundo faz na prática?" subtitle="Uma carteira voltada a créditos de carbono certificados e CPRs ligados a projetos sustentáveis." />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-10">
@@ -247,7 +251,7 @@ const Index = () => {
             <FooterButtons onNext={next} />
           </ScreenContainer>;
       case 4:
-        return <ScreenContainer showBack={true} onBack={back}>
+        return <ScreenContainer showBack={true} onBack={back} backgroundImage={forestBoat}>
             <SectionTitle title="Como estruturamos a carteira" subtitle="Equilíbrio entre ativos já performados e projetos em desenvolvimento." />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-10">
@@ -280,7 +284,7 @@ const Index = () => {
             <FooterButtons onNext={next} />
           </ScreenContainer>;
       case 5:
-        return <ScreenContainer showBack={true} onBack={back}>
+        return <ScreenContainer showBack={true} onBack={back} backgroundImage={forestSunset}>
             <SectionTitle title="Simule seu perfil de investimento e impacto" subtitle="Selecione a faixa de aporte e horizonte de investimento que fazem sentido para você." />
 
             <div className="max-w-4xl mx-auto mt-10 space-y-10 animate-fade-in">
@@ -416,7 +420,7 @@ const Index = () => {
             <FooterButtons onNext={next} />
           </ScreenContainer>;
       case 6:
-        return <ScreenContainer showBack={true} onBack={back}>
+        return <ScreenContainer showBack={true} onBack={back} backgroundImage={forestRiver}>
             <SectionTitle title="Receba o teaser completo e próximos passos" subtitle="Preencha seus dados para receber o material do fundo e contato da nossa equipe." />
 
             <div className="max-w-2xl mx-auto mt-10 animate-fade-in">
@@ -489,14 +493,23 @@ interface ScreenProps {
   children: React.ReactNode;
   showBack?: boolean;
   onBack?: () => void;
+  backgroundImage?: string;
 }
 const ScreenContainer = ({
   children,
   showBack,
-  onBack
+  onBack,
+  backgroundImage
 }: ScreenProps) => {
-  return <div className="w-full h-full flex flex-col">
-      <main className="flex-1 px-6 md:px-12 py-8 overflow-auto">
+  return <div className="fixed inset-0 flex flex-col">
+      {backgroundImage && (
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        />
+      )}
+      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+      <main className="relative flex-1 px-6 md:px-12 py-8 overflow-auto z-10">
         {showBack && onBack && (
           <div className="mb-6">
             <button onClick={onBack} className="text-sm px-6 py-3 rounded-xl border border-border hover:bg-accent transition-colors font-medium bg-card/50 backdrop-blur">
