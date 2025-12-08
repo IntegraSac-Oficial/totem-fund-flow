@@ -110,8 +110,8 @@ const Index = () => {
           return <div className="fixed inset-0 flex flex-col items-center justify-center text-center gap-6 animate-fade-in">
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${amazonForest})` }} />
             
-            <div className="flex items-center justify-center relative z-10 animate-scale-in pt-8 px-8">
-              <img src={logoFortune} alt="Fortune Carbon Removal Fund" className="h-16 w-auto hover-scale" />
+            <div className="flex items-center justify-center relative z-10 animate-scale-in pt-12 px-8">
+              <img src={logoFortune} alt="Fortune Carbon Removal Fund" className="h-32 md:h-40 w-auto hover-scale drop-shadow-2xl" />
             </div>
             
             <div className="relative z-10 space-y-4 px-6">
