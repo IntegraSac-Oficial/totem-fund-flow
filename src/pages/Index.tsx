@@ -8,9 +8,12 @@ import forestAerial from "@/assets/forest-aerial.jpg";
 import forestBoat from "@/assets/forest-boat.jpg";
 import logoFortune from "@/assets/logo-fortune.png";
 import { useSoundFeedback } from "@/hooks/useSoundFeedback";
+
+type Mode = "full" | "fast";
 type InvestorType = "PF" | "PJ" | "INST" | null;
 type TicketRange = "0-100" | "100-500" | "500-2000" | "2000+" | null;
 type Horizon = "2-" | "3-5" | "5+" | null;
+
 interface LeadData {
   investorType: InvestorType;
   ticketRange: TicketRange;
@@ -20,10 +23,18 @@ interface LeadData {
   whatsapp: string;
   country: string;
 }
-const INACTIVITY_TIMEOUT_MS = 90_000; // 90s sem tocar volta pra tela 0
+
+const INACTIVITY_TIMEOUT_MS = 90_000;
+
+// Configuração do modo - altere aqui para trocar entre full e fast
+const MODE: Mode = "fast";
+const FULL_STEPS = [0, 1, 2, 3, 4, 5, 6];
+const FAST_STEPS = [0, 1, 2]; // 0=atração, 1=simulador, 2=dados+QR
 
 const Index = () => {
-  const [step, setStep] = useState<number>(0);
+  const steps = MODE === "fast" ? FAST_STEPS : FULL_STEPS;
+  const [index, setIndex] = useState<number>(0);
+  const currentStep = steps[index];
   const [direction, setDirection] = useState<"forward" | "backward">("forward");
   const [lead, setLead] = useState<LeadData>({
     investorType: null,
@@ -42,13 +53,12 @@ const Index = () => {
     playSubmit
   } = useSoundFeedback();
 
-  // --- Controle de inatividade para totem ---
   useEffect(() => {
     let timer: number;
     const resetTimer = () => {
       if (timer) window.clearTimeout(timer);
       timer = window.setTimeout(() => {
-        setStep(0);
+        setIndex(0);
         setLead({
           investorType: null,
           ticketRange: null,
@@ -69,27 +79,22 @@ const Index = () => {
       events.forEach(ev => window.removeEventListener(ev, resetTimer));
     };
   }, []);
+
   const next = () => {
     playSoundNext();
     setDirection("forward");
-    setStep(s => s + 1);
+    setIndex(i => Math.min(steps.length - 1, i + 1));
   };
+  
   const back = () => {
     playSoundBack();
     setDirection("backward");
-    setStep(s => Math.max(0, s - 1));
+    setIndex(i => Math.max(0, i - 1));
   };
+
   const handleSubmitLead = async () => {
     try {
       playSubmit();
-      // Aqui você conecta com n8n ou sua API
-      // const res = await fetch("https://sua-api.com/leads-totem", { 
-      //   method: "POST",
-      //   body: JSON.stringify(lead)
-      // });
-      // const data = await res.json();
-      // setQrUrl(data.teaserUrl);
-
       const fakeTeaserUrl = "https://seusite.com/fundo/teaser-fortune-carbon";
       setQrUrl(fakeTeaserUrl);
     } catch (e) {
@@ -98,14 +103,180 @@ const Index = () => {
     }
   };
   const renderStep = () => {
-    switch (step) {
+    // Modo FAST: 3 passos com conteúdo otimizado
+    if (MODE === "fast") {
+      switch (currentStep) {
+        case 0:
+          return <div className="fixed inset-0 flex flex-col items-center justify-center text-center gap-6 animate-fade-in">
+            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${amazonForest})` }} />
+            
+            <div className="flex items-center justify-center relative z-10 animate-scale-in pt-8 px-8">
+              <img src={logoFortune} alt="Fortune Carbon Removal Fund" className="h-16 w-auto hover-scale" />
+            </div>
+            
+            <div className="relative z-10 space-y-4 px-6">
+              <h1 className="text-4xl md:text-5xl font-bold text-white animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                Fortune Carbon Removal Fund
+              </h1>
+              <p className="text-lg md:text-xl max-w-2xl mx-auto text-white leading-relaxed animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                Fiagro focado em créditos de carbono e ativos do agro sustentável.
+              </p>
+              <p className="text-base max-w-2xl mx-auto text-white/90 leading-relaxed animate-fade-in" style={{ animationDelay: '0.6s' }}>
+                Conectamos capital a projetos de alta integridade climática,
+                unindo potencial de retorno e impacto ambiental mensurável.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl w-full relative z-10 animate-fade-in px-6" style={{ animationDelay: '0.8s' }}>
+              <HighlightCard title="Créditos certificados" delay="100">
+                Projetos sustentáveis do agro com padrões internacionais.
+              </HighlightCard>
+              <HighlightCard title="Governança institucional" delay="200">
+                Diligência técnica e estrutura de gestão profissional.
+              </HighlightCard>
+              <HighlightCard title="Economia de baixo carbono" delay="300">
+                Tese alinhada à transição climática global.
+              </HighlightCard>
+            </div>
+
+            <button onClick={next} className="relative z-10 px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 pulse animate-fade-in" style={{ animationDelay: '1s' }}>
+              Simular impacto e receber o material
+            </button>
+
+            <p className="text-xs max-w-xl mx-auto text-white/80 leading-relaxed relative z-10 animate-fade-in px-6" style={{ animationDelay: '1.2s' }}>
+              Material informativo. Não constitui oferta pública de valores mobiliários.
+            </p>
+          </div>;
+
+        case 1:
+          return <ScreenContainer showBack={true} onBack={back} backgroundImage={forestSunset}>
+            <SectionTitle 
+              title="Simule seu perfil e potencial de impacto" 
+              subtitle="Selecione suas preferências para uma experiência personalizada." 
+            />
+
+            <div className="max-w-4xl mx-auto mt-8 space-y-8 animate-fade-in">
+              <div>
+                <h3 className="text-xl font-semibold mb-4 text-foreground">Você é:</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <ChoiceButton selected={lead.investorType === "PF"} onClick={() => { playSelect(); setLead(l => ({ ...l, investorType: "PF" })); }}>
+                    Pessoa Física
+                  </ChoiceButton>
+                  <ChoiceButton selected={lead.investorType === "PJ"} onClick={() => { playSelect(); setLead(l => ({ ...l, investorType: "PJ" })); }}>
+                    Pessoa Jurídica
+                  </ChoiceButton>
+                  <ChoiceButton selected={lead.investorType === "INST"} onClick={() => { playSelect(); setLead(l => ({ ...l, investorType: "INST" })); }}>
+                    Institucional / Family Office
+                  </ChoiceButton>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold mb-4 text-foreground">Faixa de aporte:</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <ChoiceButton selected={lead.ticketRange === "0-100"} onClick={() => { playSelect(); setLead(l => ({ ...l, ticketRange: "0-100" })); }}>
+                    Até R$ 100 mil
+                  </ChoiceButton>
+                  <ChoiceButton selected={lead.ticketRange === "100-500"} onClick={() => { playSelect(); setLead(l => ({ ...l, ticketRange: "100-500" })); }}>
+                    R$ 100k – 500k
+                  </ChoiceButton>
+                  <ChoiceButton selected={lead.ticketRange === "500-2000"} onClick={() => { playSelect(); setLead(l => ({ ...l, ticketRange: "500-2000" })); }}>
+                    R$ 500k – 2M
+                  </ChoiceButton>
+                  <ChoiceButton selected={lead.ticketRange === "2000+"} onClick={() => { playSelect(); setLead(l => ({ ...l, ticketRange: "2000+" })); }}>
+                    Acima de R$ 2M
+                  </ChoiceButton>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold mb-4 text-foreground">Horizonte:</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <ChoiceButton selected={lead.horizon === "2-"} onClick={() => { playSelect(); setLead(l => ({ ...l, horizon: "2-" })); }}>
+                    Até 2 anos
+                  </ChoiceButton>
+                  <ChoiceButton selected={lead.horizon === "3-5"} onClick={() => { playSelect(); setLead(l => ({ ...l, horizon: "3-5" })); }}>
+                    3 – 5 anos
+                  </ChoiceButton>
+                  <ChoiceButton selected={lead.horizon === "5+"} onClick={() => { playSelect(); setLead(l => ({ ...l, horizon: "5+" })); }}>
+                    Acima de 5 anos
+                  </ChoiceButton>
+                </div>
+              </div>
+
+              <div className="p-5 rounded-2xl border border-primary/20 bg-accent/30">
+                <p className="text-foreground leading-relaxed text-sm">
+                  Com esse perfil, você pode se expor a uma carteira que combina ativos já estruturados e projetos em desenvolvimento, com foco em alta integridade climática e impacto verificável.
+                </p>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  Estimativas indicativas. Não há garantia de rentabilidade futura.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-8 flex justify-center">
+              <button onClick={next} className="px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105">
+                Quero receber o teaser completo
+              </button>
+            </div>
+          </ScreenContainer>;
+
+        case 2:
+          return <ScreenContainer showBack={true} onBack={back} backgroundImage={forestRiver}>
+            <SectionTitle 
+              title="Receba o material completo do fundo" 
+              subtitle="Deixe seus dados para acessar o teaser e os próximos passos com nossa equipe." 
+            />
+
+            <div className="max-w-2xl mx-auto mt-8 animate-fade-in">
+              {!qrUrl ? (
+                <div className="space-y-5">
+                  <InputField label="Nome completo" value={lead.name} onChange={e => setLead(l => ({ ...l, name: e.target.value }))} />
+                  <InputField label="E-mail" type="email" value={lead.email} onChange={e => setLead(l => ({ ...l, email: e.target.value }))} />
+                  <InputField label="WhatsApp (com DDI)" placeholder="+55 11 99999-9999" value={lead.whatsapp} onChange={e => setLead(l => ({ ...l, whatsapp: e.target.value }))} />
+                  <InputField label="País / Estado" value={lead.country} onChange={e => setLead(l => ({ ...l, country: e.target.value }))} />
+
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    ✅ Autorizo o uso dos meus dados para contato sobre este fundo.
+                  </p>
+
+                  <div className="flex justify-center pt-4">
+                    <button onClick={handleSubmitLead} className="px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl">
+                      Enviar e gerar acesso
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center gap-6">
+                  <p className="text-center text-lg max-w-xl text-foreground leading-relaxed">
+                    Obrigado! Escaneie o QR Code para acessar o teaser completo e continuar os próximos passos com nossa equipe.
+                  </p>
+                  
+                  <div className="p-8 rounded-3xl bg-card border-2 border-primary/30 shadow-2xl">
+                    <QRCodeSVG value={qrUrl} size={256} level="H" includeMargin={true} fgColor="hsl(var(--foreground))" bgColor="hsl(var(--card))" />
+                  </div>
+                </div>
+              )}
+
+              <p className="mt-8 text-[10px] text-center text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                Material publicitário e informativo. Não constitui oferta ou recomendação de investimento. A decisão deve considerar exclusivamente o regulamento e documentos oficiais do fundo.
+              </p>
+            </div>
+          </ScreenContainer>;
+
+        default:
+          return null;
+      }
+    }
+
+    // Modo FULL: 7 passos originais
+    switch (currentStep) {
       case 0:
         return <div className="fixed inset-0 flex flex-col items-center justify-center text-center gap-8 animate-fade-in">
             <div className="absolute inset-0 bg-cover bg-center" style={{
               backgroundImage: `url(${amazonForest})`
             }} />
               
-            {/* Logo Principal */}
             <div className="flex items-center justify-center mb-2 relative z-10 animate-scale-in pt-8 px-8">
               <img 
                 src={logoFortune} 
@@ -157,10 +328,7 @@ const Index = () => {
               </HighlightCard>
             </div>
 
-            <button onClick={() => {
-              playSoundNext();
-              setStep(1);
-            }} className="relative z-10 px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 pulse animate-fade-in" style={{
+            <button onClick={next} className="relative z-10 px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 pulse animate-fade-in" style={{
               animationDelay: '1s'
             }}>
               Toque na tela para simular seu investimento
@@ -480,7 +648,7 @@ const Index = () => {
     }
   };
   return <div className="w-screen h-screen bg-background text-foreground overflow-hidden">
-      <div key={step} className={`w-full h-full ${direction === "forward" ? "animate-fade-in" : "animate-fade-in"}`}>
+      <div key={`${MODE}-${index}`} className={`w-full h-full ${direction === "forward" ? "animate-fade-in" : "animate-fade-in"}`}>
         {renderStep()}
       </div>
     </div>;
