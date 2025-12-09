@@ -306,7 +306,7 @@ const Index = () => {
                   country: e.target.value
                 }))} />
 
-                  <p className="text-xs text-muted-foreground leading-relaxed">
+                  <p className="text-xs text-white leading-relaxed">
                     ✅ Autorizo o uso dos meus dados para contato sobre este fundo.
                   </p>
 
