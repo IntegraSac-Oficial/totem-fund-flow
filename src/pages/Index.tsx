@@ -55,7 +55,7 @@ const Index = () => {
   // Configura volume baixo do vídeo
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.volume = 0.3;
+      videoRef.current.volume = 0.4;
     }
   }, [currentStep]);
   useEffect(() => {
