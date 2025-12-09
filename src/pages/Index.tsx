@@ -102,9 +102,14 @@ const Index = () => {
       switch (currentStep) {
         case 0:
           return <div className="fixed inset-0 flex flex-col items-center justify-center text-center gap-6 animate-fade-in">
-            <div className="absolute inset-0 bg-cover bg-center" style={{
-              backgroundImage: `url(${amazonForest})`
-            }} />
+            <video 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+              src="https://fortunegroup.com.br/wp-content/uploads/2025/12/Fundovivo.mp4"
+            />
             
             <div className="flex items-center justify-center relative z-10 animate-scale-in pt-12 px-8">
               <img src={logoFortune} alt="Fortune Carbon Removal Fund" className="h-48 md:h-64 w-auto hover-scale drop-shadow-2xl" />
