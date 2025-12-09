@@ -258,7 +258,7 @@ const Index = () => {
                 </div>
               )}
 
-              <p className="mt-8 text-[10px] text-center text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+              <p className="mt-8 text-[10px] text-center text-white/70 leading-relaxed max-w-2xl mx-auto">
                 Material publicitário e informativo. Não constitui oferta ou recomendação de investimento. A decisão deve considerar exclusivamente o regulamento e documentos oficiais do fundo.
               </p>
             </div>
