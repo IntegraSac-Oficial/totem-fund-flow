@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import heroCarbon from "@/assets/hero-carbon.jpg";
 import amazonForest from "@/assets/amazon-forest.jpg";
@@ -44,12 +44,20 @@ const Index = () => {
     country: ""
   });
   const [qrUrl, setQrUrl] = useState<string | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const {
     playNext: playSoundNext,
     playBack: playSoundBack,
     playSelect,
     playSubmit
   } = useSoundFeedback();
+  
+  // Configura volume baixo do vídeo
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = 0.3;
+    }
+  }, [currentStep]);
   useEffect(() => {
     let timer: number;
     const resetTimer = () => {
@@ -103,9 +111,9 @@ const Index = () => {
         case 0:
           return <div className="fixed inset-0 flex flex-col items-center justify-center text-center gap-6 animate-fade-in">
             <video 
+              ref={videoRef}
               autoPlay 
               loop 
-              muted 
               playsInline
               className="absolute inset-0 w-full h-full object-cover"
               src="https://fortunegroup.com.br/wp-content/uploads/2025/12/Fundovivo.mp4"
