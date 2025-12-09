@@ -6,6 +6,7 @@ import forestSunset from "@/assets/forest-sunset.jpg";
 import forestRiver from "@/assets/forest-river.jpg";
 import forestAerial from "@/assets/forest-aerial.jpg";
 import forestBoat from "@/assets/forest-boat.jpg";
+import fundoForm from "@/assets/fundo-form.jpg";
 import logoFortune from "@/assets/logo-fortune.png";
 import { useSoundFeedback } from "@/hooks/useSoundFeedback";
 type Mode = "full" | "fast";
@@ -284,7 +285,7 @@ const Index = () => {
             </div>
           </ScreenContainer>;
         case 2:
-          return <ScreenContainer showBack={true} onBack={back} backgroundImage={forestRiver}>
+          return <ScreenContainer showBack={true} onBack={back} backgroundImage={fundoForm}>
             <SectionTitle title="Receba o material completo do fundo" subtitle="Deixe seus dados para acessar o teaser e os próximos passos com nossa equipe." />
 
             <div className="max-w-2xl mx-auto mt-8 animate-fade-in">
