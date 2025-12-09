@@ -289,19 +289,19 @@ const Index = () => {
 
             <div className="max-w-2xl mx-auto mt-8 animate-fade-in">
               {!qrUrl ? <div className="space-y-5">
-                  <InputField label="Nome completo" value={lead.name} onChange={e => setLead(l => ({
+                  <InputField label="Nome completo" placeholder="Ex: João da Silva" value={lead.name} onChange={e => setLead(l => ({
                   ...l,
                   name: e.target.value
                 }))} />
-                  <InputField label="E-mail" type="email" value={lead.email} onChange={e => setLead(l => ({
+                  <InputField label="E-mail" type="email" placeholder="Ex: joao@email.com" value={lead.email} onChange={e => setLead(l => ({
                   ...l,
                   email: e.target.value
                 }))} />
-                  <InputField label="WhatsApp (com DDI)" placeholder="+55 11 99999-9999" value={lead.whatsapp} onChange={e => setLead(l => ({
+                  <InputField label="WhatsApp (com DDI)" placeholder="Ex: +55 11 99999-9999" value={lead.whatsapp} onChange={e => setLead(l => ({
                   ...l,
                   whatsapp: e.target.value
                 }))} />
-                  <InputField label="País / Estado" value={lead.country} onChange={e => setLead(l => ({
+                  <InputField label="País / Estado" placeholder="Ex: Brasil / São Paulo" value={lead.country} onChange={e => setLead(l => ({
                   ...l,
                   country: e.target.value
                 }))} />
@@ -655,19 +655,19 @@ const Index = () => {
 
             <div className="max-w-2xl mx-auto mt-10 animate-fade-in">
               {!qrUrl ? <div className="space-y-6">
-                  <InputField label="Nome completo" value={lead.name} onChange={e => setLead(l => ({
+                  <InputField label="Nome completo" placeholder="Ex: João da Silva" value={lead.name} onChange={e => setLead(l => ({
                 ...l,
                 name: e.target.value
               }))} />
-                  <InputField label="E-mail" type="email" value={lead.email} onChange={e => setLead(l => ({
+                  <InputField label="E-mail" type="email" placeholder="Ex: joao@email.com" value={lead.email} onChange={e => setLead(l => ({
                 ...l,
                 email: e.target.value
               }))} />
-                  <InputField label="WhatsApp (com DDI)" placeholder="+55 11 99999-9999" value={lead.whatsapp} onChange={e => setLead(l => ({
+                  <InputField label="WhatsApp (com DDI)" placeholder="Ex: +55 11 99999-9999" value={lead.whatsapp} onChange={e => setLead(l => ({
                 ...l,
                 whatsapp: e.target.value
               }))} />
-                  <InputField label="País / Estado" value={lead.country} onChange={e => setLead(l => ({
+                  <InputField label="País / Estado" placeholder="Ex: Brasil / São Paulo" value={lead.country} onChange={e => setLead(l => ({
                 ...l,
                 country: e.target.value
               }))} />
@@ -809,7 +809,7 @@ const InputField = ({
   ...props
 }: InputFieldProps) => <label className="block">
     <span className="block mb-2 text-sm font-medium text-primary-foreground">{label}</span>
-    <input {...props} className="w-full px-5 py-4 rounded-xl bg-card border border-input outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-muted-foreground" />
+    <input {...props} className="w-full px-5 py-4 rounded-xl bg-card border border-input outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-emerald-500" />
   </label>;
 interface ChoiceButtonProps {
   selected?: boolean;
