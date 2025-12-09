@@ -809,7 +809,7 @@ const InputField = ({
   ...props
 }: InputFieldProps) => <label className="block">
     <span className="block mb-2 text-sm font-medium text-primary-foreground">{label}</span>
-    <input {...props} className="w-full px-5 py-4 rounded-xl bg-card border border-input outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-emerald-500" />
+    <input {...props} className="w-full px-5 py-4 rounded-xl bg-card border border-input outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-emerald-700" />
   </label>;
 interface ChoiceButtonProps {
   selected?: boolean;
