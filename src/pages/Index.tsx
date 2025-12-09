@@ -763,6 +763,6 @@ const ChoiceButton = ({
   selected,
   onClick,
   children
-}: ChoiceButtonProps) => <button onClick={onClick} className={`px-6 py-4 rounded-xl text-base font-medium text-left border-2 transition-all ${selected ? "border-primary bg-primary/10 text-foreground shadow-lg" : "border-border bg-card text-muted-foreground hover:bg-accent hover:border-primary/30"}`}>
+}: ChoiceButtonProps) => <button onClick={onClick} className={`px-6 py-4 rounded-xl text-base font-medium text-left border-2 transition-all ${selected ? "border-white bg-white/10 text-white shadow-lg" : "border-border bg-card text-muted-foreground hover:bg-accent hover:border-white/30"}`}>
     {children}
   </button>;
