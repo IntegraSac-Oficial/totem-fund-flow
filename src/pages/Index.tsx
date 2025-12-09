@@ -8,12 +8,10 @@ import forestAerial from "@/assets/forest-aerial.jpg";
 import forestBoat from "@/assets/forest-boat.jpg";
 import logoFortune from "@/assets/logo-fortune.png";
 import { useSoundFeedback } from "@/hooks/useSoundFeedback";
-
 type Mode = "full" | "fast";
 type InvestorType = "PF" | "PJ" | "INST" | null;
 type TicketRange = "0-100" | "100-500" | "500-2000" | "2000+" | null;
 type Horizon = "2-" | "3-5" | "5+" | null;
-
 interface LeadData {
   investorType: InvestorType;
   ticketRange: TicketRange;
@@ -23,7 +21,6 @@ interface LeadData {
   whatsapp: string;
   country: string;
 }
-
 const INACTIVITY_TIMEOUT_MS = 90_000;
 
 // Configuração do modo - altere aqui para trocar entre full e fast
@@ -52,7 +49,6 @@ const Index = () => {
     playSelect,
     playSubmit
   } = useSoundFeedback();
-
   useEffect(() => {
     let timer: number;
     const resetTimer = () => {
@@ -79,19 +75,16 @@ const Index = () => {
       events.forEach(ev => window.removeEventListener(ev, resetTimer));
     };
   }, []);
-
   const next = () => {
     playSoundNext();
     setDirection("forward");
     setIndex(i => Math.min(steps.length - 1, i + 1));
   };
-  
   const back = () => {
     playSoundBack();
     setDirection("backward");
     setIndex(i => Math.max(0, i - 1));
   };
-
   const handleSubmitLead = async () => {
     try {
       playSubmit();
@@ -108,26 +101,36 @@ const Index = () => {
       switch (currentStep) {
         case 0:
           return <div className="fixed inset-0 flex flex-col items-center justify-center text-center gap-6 animate-fade-in">
-            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${amazonForest})` }} />
+            <div className="absolute inset-0 bg-cover bg-center" style={{
+              backgroundImage: `url(${amazonForest})`
+            }} />
             
             <div className="flex items-center justify-center relative z-10 animate-scale-in pt-12 px-8">
               <img src={logoFortune} alt="Fortune Carbon Removal Fund" className="h-32 md:h-40 w-auto hover-scale drop-shadow-2xl" />
             </div>
             
             <div className="relative z-10 space-y-4 px-6">
-              <h1 className="text-4xl md:text-5xl font-bold text-white animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <h1 className="text-4xl md:text-5xl font-bold text-white animate-fade-in" style={{
+                animationDelay: '0.2s'
+              }}>
                 Fortune Carbon Removal Fund
               </h1>
-              <p className="text-lg md:text-xl max-w-2xl mx-auto text-white leading-relaxed animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <p className="text-lg md:text-xl max-w-2xl mx-auto text-white leading-relaxed animate-fade-in" style={{
+                animationDelay: '0.4s'
+              }}>
                 Fiagro focado em créditos de carbono e ativos do agro sustentável.
               </p>
-              <p className="text-base max-w-2xl mx-auto text-white/90 leading-relaxed animate-fade-in" style={{ animationDelay: '0.6s' }}>
+              <p className="text-base max-w-2xl mx-auto text-white/90 leading-relaxed animate-fade-in" style={{
+                animationDelay: '0.6s'
+              }}>
                 Conectamos capital a projetos de alta integridade climática,
                 unindo potencial de retorno e impacto ambiental mensurável.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl w-full relative z-10 animate-fade-in px-6" style={{ animationDelay: '0.8s' }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl w-full relative z-10 animate-fade-in px-6" style={{
+              animationDelay: '0.8s'
+            }}>
               <HighlightCard title="Créditos certificados" delay="100">
                 Projetos sustentáveis do agro com padrões internacionais.
               </HighlightCard>
@@ -139,33 +142,51 @@ const Index = () => {
               </HighlightCard>
             </div>
 
-            <button onClick={next} className="relative z-10 px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 pulse animate-fade-in" style={{ animationDelay: '1s' }}>
+            <button onClick={next} className="relative z-10 px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 pulse animate-fade-in" style={{
+              animationDelay: '1s'
+            }}>
               Simular impacto e receber o material
             </button>
 
-            <p className="text-xs max-w-xl mx-auto text-white/80 leading-relaxed relative z-10 animate-fade-in px-6" style={{ animationDelay: '1.2s' }}>
+            <p className="text-xs max-w-xl mx-auto text-white/80 leading-relaxed relative z-10 animate-fade-in px-6" style={{
+              animationDelay: '1.2s'
+            }}>
               Material informativo. Não constitui oferta pública de valores mobiliários.
             </p>
           </div>;
-
         case 1:
           return <ScreenContainer showBack={true} onBack={back} backgroundImage={forestSunset}>
-            <SectionTitle 
-              title="Simule seu perfil e potencial de impacto" 
-              subtitle="Selecione suas preferências para uma experiência personalizada." 
-            />
+            <SectionTitle title="Simule seu perfil e potencial de impacto" subtitle="Selecione suas preferências para uma experiência personalizada." />
 
             <div className="max-w-4xl mx-auto mt-8 space-y-8 animate-fade-in">
               <div>
                 <h3 className="text-xl font-semibold mb-4 text-white">Você é:</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <ChoiceButton selected={lead.investorType === "PF"} onClick={() => { playSelect(); setLead(l => ({ ...l, investorType: "PF" })); }}>
+                  <ChoiceButton selected={lead.investorType === "PF"} onClick={() => {
+                    playSelect();
+                    setLead(l => ({
+                      ...l,
+                      investorType: "PF"
+                    }));
+                  }}>
                     Pessoa Física
                   </ChoiceButton>
-                  <ChoiceButton selected={lead.investorType === "PJ"} onClick={() => { playSelect(); setLead(l => ({ ...l, investorType: "PJ" })); }}>
+                  <ChoiceButton selected={lead.investorType === "PJ"} onClick={() => {
+                    playSelect();
+                    setLead(l => ({
+                      ...l,
+                      investorType: "PJ"
+                    }));
+                  }}>
                     Pessoa Jurídica
                   </ChoiceButton>
-                  <ChoiceButton selected={lead.investorType === "INST"} onClick={() => { playSelect(); setLead(l => ({ ...l, investorType: "INST" })); }}>
+                  <ChoiceButton selected={lead.investorType === "INST"} onClick={() => {
+                    playSelect();
+                    setLead(l => ({
+                      ...l,
+                      investorType: "INST"
+                    }));
+                  }}>
                     Institucional / Family Office
                   </ChoiceButton>
                 </div>
@@ -174,16 +195,40 @@ const Index = () => {
               <div>
                 <h3 className="text-xl font-semibold mb-4 text-white">Faixa de aporte:</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <ChoiceButton selected={lead.ticketRange === "0-100"} onClick={() => { playSelect(); setLead(l => ({ ...l, ticketRange: "0-100" })); }}>
+                  <ChoiceButton selected={lead.ticketRange === "0-100"} onClick={() => {
+                    playSelect();
+                    setLead(l => ({
+                      ...l,
+                      ticketRange: "0-100"
+                    }));
+                  }}>
                     Até R$ 100 mil
                   </ChoiceButton>
-                  <ChoiceButton selected={lead.ticketRange === "100-500"} onClick={() => { playSelect(); setLead(l => ({ ...l, ticketRange: "100-500" })); }}>
+                  <ChoiceButton selected={lead.ticketRange === "100-500"} onClick={() => {
+                    playSelect();
+                    setLead(l => ({
+                      ...l,
+                      ticketRange: "100-500"
+                    }));
+                  }}>
                     R$ 100k – 500k
                   </ChoiceButton>
-                  <ChoiceButton selected={lead.ticketRange === "500-2000"} onClick={() => { playSelect(); setLead(l => ({ ...l, ticketRange: "500-2000" })); }}>
+                  <ChoiceButton selected={lead.ticketRange === "500-2000"} onClick={() => {
+                    playSelect();
+                    setLead(l => ({
+                      ...l,
+                      ticketRange: "500-2000"
+                    }));
+                  }}>
                     R$ 500k – 2M
                   </ChoiceButton>
-                  <ChoiceButton selected={lead.ticketRange === "2000+"} onClick={() => { playSelect(); setLead(l => ({ ...l, ticketRange: "2000+" })); }}>
+                  <ChoiceButton selected={lead.ticketRange === "2000+"} onClick={() => {
+                    playSelect();
+                    setLead(l => ({
+                      ...l,
+                      ticketRange: "2000+"
+                    }));
+                  }}>
                     Acima de R$ 2M
                   </ChoiceButton>
                 </div>
@@ -192,13 +237,31 @@ const Index = () => {
               <div>
                 <h3 className="text-xl font-semibold mb-4 text-white">Horizonte:</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <ChoiceButton selected={lead.horizon === "2-"} onClick={() => { playSelect(); setLead(l => ({ ...l, horizon: "2-" })); }}>
+                  <ChoiceButton selected={lead.horizon === "2-"} onClick={() => {
+                    playSelect();
+                    setLead(l => ({
+                      ...l,
+                      horizon: "2-"
+                    }));
+                  }}>
                     Até 2 anos
                   </ChoiceButton>
-                  <ChoiceButton selected={lead.horizon === "3-5"} onClick={() => { playSelect(); setLead(l => ({ ...l, horizon: "3-5" })); }}>
+                  <ChoiceButton selected={lead.horizon === "3-5"} onClick={() => {
+                    playSelect();
+                    setLead(l => ({
+                      ...l,
+                      horizon: "3-5"
+                    }));
+                  }}>
                     3 – 5 anos
                   </ChoiceButton>
-                  <ChoiceButton selected={lead.horizon === "5+"} onClick={() => { playSelect(); setLead(l => ({ ...l, horizon: "5+" })); }}>
+                  <ChoiceButton selected={lead.horizon === "5+"} onClick={() => {
+                    playSelect();
+                    setLead(l => ({
+                      ...l,
+                      horizon: "5+"
+                    }));
+                  }}>
                     Acima de 5 anos
                   </ChoiceButton>
                 </div>
@@ -220,21 +283,28 @@ const Index = () => {
               </button>
             </div>
           </ScreenContainer>;
-
         case 2:
           return <ScreenContainer showBack={true} onBack={back} backgroundImage={forestRiver}>
-            <SectionTitle 
-              title="Receba o material completo do fundo" 
-              subtitle="Deixe seus dados para acessar o teaser e os próximos passos com nossa equipe." 
-            />
+            <SectionTitle title="Receba o material completo do fundo" subtitle="Deixe seus dados para acessar o teaser e os próximos passos com nossa equipe." />
 
             <div className="max-w-2xl mx-auto mt-8 animate-fade-in">
-              {!qrUrl ? (
-                <div className="space-y-5">
-                  <InputField label="Nome completo" value={lead.name} onChange={e => setLead(l => ({ ...l, name: e.target.value }))} />
-                  <InputField label="E-mail" type="email" value={lead.email} onChange={e => setLead(l => ({ ...l, email: e.target.value }))} />
-                  <InputField label="WhatsApp (com DDI)" placeholder="+55 11 99999-9999" value={lead.whatsapp} onChange={e => setLead(l => ({ ...l, whatsapp: e.target.value }))} />
-                  <InputField label="País / Estado" value={lead.country} onChange={e => setLead(l => ({ ...l, country: e.target.value }))} />
+              {!qrUrl ? <div className="space-y-5">
+                  <InputField label="Nome completo" value={lead.name} onChange={e => setLead(l => ({
+                  ...l,
+                  name: e.target.value
+                }))} />
+                  <InputField label="E-mail" type="email" value={lead.email} onChange={e => setLead(l => ({
+                  ...l,
+                  email: e.target.value
+                }))} />
+                  <InputField label="WhatsApp (com DDI)" placeholder="+55 11 99999-9999" value={lead.whatsapp} onChange={e => setLead(l => ({
+                  ...l,
+                  whatsapp: e.target.value
+                }))} />
+                  <InputField label="País / Estado" value={lead.country} onChange={e => setLead(l => ({
+                  ...l,
+                  country: e.target.value
+                }))} />
 
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     ✅ Autorizo o uso dos meus dados para contato sobre este fundo.
@@ -245,9 +315,7 @@ const Index = () => {
                       Enviar e gerar acesso
                     </button>
                   </div>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center gap-6">
+                </div> : <div className="flex flex-col items-center gap-6">
                   <p className="text-center text-lg max-w-xl text-white leading-relaxed">
                     Obrigado! Escaneie o QR Code para acessar o teaser completo e continuar os próximos passos com nossa equipe.
                   </p>
@@ -255,15 +323,13 @@ const Index = () => {
                   <div className="p-8 rounded-3xl bg-card border-2 border-primary/30 shadow-2xl">
                     <QRCodeSVG value={qrUrl} size={256} level="H" includeMargin={true} fgColor="hsl(var(--foreground))" bgColor="hsl(var(--card))" />
                   </div>
-                </div>
-              )}
+                </div>}
 
               <p className="mt-8 text-[10px] text-center text-white/70 leading-relaxed max-w-2xl mx-auto">
                 Material publicitário e informativo. Não constitui oferta ou recomendação de investimento. A decisão deve considerar exclusivamente o regulamento e documentos oficiais do fundo.
               </p>
             </div>
           </ScreenContainer>;
-
         default:
           return null;
       }
@@ -274,21 +340,17 @@ const Index = () => {
       case 0:
         return <div className="fixed inset-0 flex flex-col items-center justify-center text-center gap-8 animate-fade-in">
             <div className="absolute inset-0 bg-cover bg-center" style={{
-              backgroundImage: `url(${amazonForest})`
-            }} />
+            backgroundImage: `url(${amazonForest})`
+          }} />
               
             <div className="flex items-center justify-center mb-2 relative z-10 animate-scale-in pt-8 px-8">
-              <img 
-                src={logoFortune} 
-                alt="Fortune Carbon Removal Fund" 
-                className="h-20 w-auto hover-scale"
-              />
+              <img src={logoFortune} alt="Fortune Carbon Removal Fund" className="h-20 w-auto hover-scale" />
             </div>
               
             <div className="relative z-10 space-y-6 px-6">
               <div className="animate-fade-in" style={{
-                animationDelay: '0.2s'
-              }}>
+              animationDelay: '0.2s'
+            }}>
                 <p className="text-xs uppercase tracking-[0.3em] text-white font-medium">
                   FortuneGroup S.A. &amp; SFI Investimentos
                 </p>
@@ -298,22 +360,22 @@ const Index = () => {
               </div>
                 
               <p className="text-2xl md:text-3xl font-semibold max-w-3xl mx-auto text-white leading-tight animate-fade-in" style={{
-                animationDelay: '0.4s'
-              }}>
+              animationDelay: '0.4s'
+            }}>
                 Invista na transição climática com lastro em créditos de carbono reais da Amazônia
               </p>
                 
               <p className="mt-4 text-base md:text-lg max-w-3xl mx-auto text-white leading-relaxed animate-fade-in" style={{
-                animationDelay: '0.6s'
-              }}>
+              animationDelay: '0.6s'
+            }}>
                 Fiagro focado em créditos de carbono e CPRs que conecta o
                 agronegócio brasileiro à economia de baixo carbono.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full relative z-10 animate-fade-in px-6" style={{
-              animationDelay: '0.8s'
-            }}>
+            animationDelay: '0.8s'
+          }}>
               <HighlightCard title="R$ 500 milhões" delay="100">
                 Tamanho alvo da oferta, com foco em ativos de alta integridade
                 climática.
@@ -329,14 +391,14 @@ const Index = () => {
             </div>
 
             <button onClick={next} className="relative z-10 px-12 py-5 rounded-2xl text-xl font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:scale-105 pulse animate-fade-in" style={{
-              animationDelay: '1s'
-            }}>
+            animationDelay: '1s'
+          }}>
               Toque na tela para simular seu investimento
             </button>
 
             <p className="text-xs max-w-2xl mx-auto text-white leading-relaxed relative z-10 animate-fade-in px-6" style={{
-              animationDelay: '1.2s'
-            }}>
+            animationDelay: '1.2s'
+          }}>
               Material publicitário. Não constitui oferta pública de valores
               mobiliários. Leia o regulamento e demais documentos oficiais
               antes de investir.
@@ -670,21 +732,16 @@ const ScreenContainer = ({
   backgroundImage
 }: ScreenProps) => {
   return <div className="fixed inset-0 flex flex-col">
-      {backgroundImage && (
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-        />
-      )}
+      {backgroundImage && <div className="absolute inset-0 bg-cover bg-center" style={{
+      backgroundImage: `url(${backgroundImage})`
+    }} />}
       
       <main className="relative flex-1 px-6 md:px-12 py-8 overflow-auto z-10">
-        {showBack && onBack && (
-          <div className="mb-6">
+        {showBack && onBack && <div className="mb-6">
             <button onClick={onBack} className="text-sm px-6 py-3 rounded-xl border border-border hover:bg-accent transition-colors font-medium bg-card/50 backdrop-blur">
               ← Voltar
             </button>
-          </div>
-        )}
+          </div>}
         <div className="w-full h-full flex items-center justify-center">
           <div className="w-full max-w-7xl mx-auto">
             {children}
@@ -751,7 +808,7 @@ const InputField = ({
   label,
   ...props
 }: InputFieldProps) => <label className="block">
-    <span className="block mb-2 text-sm font-medium text-foreground">{label}</span>
+    <span className="block mb-2 text-sm font-medium text-primary-foreground">{label}</span>
     <input {...props} className="w-full px-5 py-4 rounded-xl bg-card border border-input outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-foreground placeholder:text-muted-foreground" />
   </label>;
 interface ChoiceButtonProps {
