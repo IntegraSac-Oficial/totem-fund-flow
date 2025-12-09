@@ -248,7 +248,7 @@ const Index = () => {
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-6">
-                  <p className="text-center text-lg max-w-xl text-foreground leading-relaxed">
+                  <p className="text-center text-lg max-w-xl text-white leading-relaxed">
                     Obrigado! Escaneie o QR Code para acessar o teaser completo e continuar os próximos passos com nossa equipe.
                   </p>
                   
