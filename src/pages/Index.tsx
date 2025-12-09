@@ -157,7 +157,7 @@ const Index = () => {
 
             <div className="max-w-4xl mx-auto mt-8 space-y-8 animate-fade-in">
               <div>
-                <h3 className="text-xl font-semibold mb-4 text-foreground">Você é:</h3>
+                <h3 className="text-xl font-semibold mb-4 text-white">Você é:</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <ChoiceButton selected={lead.investorType === "PF"} onClick={() => { playSelect(); setLead(l => ({ ...l, investorType: "PF" })); }}>
                     Pessoa Física
@@ -172,7 +172,7 @@ const Index = () => {
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold mb-4 text-foreground">Faixa de aporte:</h3>
+                <h3 className="text-xl font-semibold mb-4 text-white">Faixa de aporte:</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <ChoiceButton selected={lead.ticketRange === "0-100"} onClick={() => { playSelect(); setLead(l => ({ ...l, ticketRange: "0-100" })); }}>
                     Até R$ 100 mil
@@ -190,7 +190,7 @@ const Index = () => {
               </div>
 
               <div>
-                <h3 className="text-xl font-semibold mb-4 text-foreground">Horizonte:</h3>
+                <h3 className="text-xl font-semibold mb-4 text-white">Horizonte:</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <ChoiceButton selected={lead.horizon === "2-"} onClick={() => { playSelect(); setLead(l => ({ ...l, horizon: "2-" })); }}>
                     Até 2 anos
@@ -701,8 +701,8 @@ const SectionTitle = ({
   title,
   subtitle
 }: SectionTitleProps) => <div className="text-center max-w-4xl mx-auto mb-8 animate-fade-in">
-    <h2 className="text-4xl md:text-5xl font-bold text-foreground">{title}</h2>
-    {subtitle && <p className="mt-4 text-lg md:text-xl text-muted-foreground leading-relaxed">{subtitle}</p>}
+    <h2 className="text-4xl md:text-5xl font-bold text-white">{title}</h2>
+    {subtitle && <p className="mt-4 text-lg md:text-xl text-white/90 leading-relaxed">{subtitle}</p>}
   </div>;
 interface HighlightCardProps {
   title: string;
