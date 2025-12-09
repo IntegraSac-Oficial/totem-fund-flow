@@ -204,11 +204,11 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl border border-primary/20 bg-accent/30">
-                <p className="text-foreground leading-relaxed text-sm">
+              <div className="p-5 rounded-2xl border border-white/20 bg-white/10 backdrop-blur">
+                <p className="text-white leading-relaxed text-sm">
                   Com esse perfil, você pode se expor a uma carteira que combina ativos já estruturados e projetos em desenvolvimento, com foco em alta integridade climática e impacto verificável.
                 </p>
-                <p className="mt-2 text-xs text-muted-foreground">
+                <p className="mt-2 text-xs text-white/80">
                   Estimativas indicativas. Não há garantia de rentabilidade futura.
                 </p>
               </div>
