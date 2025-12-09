@@ -676,7 +676,7 @@ const ScreenContainer = ({
           style={{ backgroundImage: `url(${backgroundImage})` }}
         />
       )}
-      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+      
       <main className="relative flex-1 px-6 md:px-12 py-8 overflow-auto z-10">
         {showBack && onBack && (
           <div className="mb-6">
