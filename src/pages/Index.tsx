@@ -106,7 +106,7 @@ const Index = () => {
             }} />
             
             <div className="flex items-center justify-center relative z-10 animate-scale-in pt-12 px-8">
-              <img src={logoFortune} alt="Fortune Carbon Removal Fund" className="h-32 md:h-40 w-auto hover-scale drop-shadow-2xl" />
+              <img src={logoFortune} alt="Fortune Carbon Removal Fund" className="h-48 md:h-64 w-auto hover-scale drop-shadow-2xl" />
             </div>
             
             <div className="relative z-10 space-y-4 px-6">
